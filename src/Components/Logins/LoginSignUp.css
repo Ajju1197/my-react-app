@@ -1,0 +1,59 @@
+.signUpFormBlock{
+    display: grid;
+    width: 60%;
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+    gap: 10px;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.signUpFromMainDiv{
+    height: 74.2vh;
+    display: flex;
+    align-items: center;
+}
+.formImg{
+    height: 400px;
+    width: 100%;
+}
+.formImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.form-group{
+    position: relative;
+}
+.form-group label{
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 7px;
+    transition: 0.3s ease all;
+    font-size: 12px;
+    color: #5a5a5a;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 30ch;
+}
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label{
+    top:-9px;
+    font-size:12px;
+    background-color: white;
+    color: #4e73df;
+    font-weight: 400;
+    padding-inline: 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 20ch;
+}
+
+.form-group input:focus{
+    border: 1px solid #4e73df;
+    outline: none;
+    box-shadow: none;
+}
