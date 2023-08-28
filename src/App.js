@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Login from './Components/Logins/Login';
 import toast, { Toaster } from 'react-hot-toast';
 import ScrollToTop from './Components/ScrollToTop';
+import UserProfile from './Pages/UserProfile';
 
 const App = () => {
 
@@ -100,19 +101,20 @@ const App = () => {
         <div className={showSideNav ? 'sideNavWidthClass' : 'sideNavHideClass'}>
           <SideNav showSideNav={showSideNav} toggleSideNav={toggleSideNav} />
         </div>
-        <div className={showSideNav ? 'right-block' : 'rightBlockSpanTwoClass'}>
+        <div className={showSideNav ? 'right-block' : 'rightBlockWithoutSideNav'}>
           <div className='Header'>
             <Navbar toggleSideNav={toggleSideNav} handleLogout={handleLogout} showSideNav={showSideNav} isLoggedIn={isLoggedIn} />
           </div>
           <div className='mainBody'>
             <div className='content'>
               <Routes>
-                <Route path="/home" exact element={<Home />} />;
+                <Route path="/home" exact element={<Home isLoggedIn={isLoggedIn}/>} />;
+                <Route path="/userProfile" exact element={<UserProfile isLoggedIn={isLoggedIn}/>} />;
                 <Route path="/" element={<Login onLogin={handleLogin} />} />;
                 {/* <Route path="orderSummary" element={<OrderSummary />} /> */}
                 <Route path="/about" element={isLoggedIn ? <About /> : <Navigate to="/" />} />;
                 <Route path="/register" element={!isLoggedIn ? <SignUp /> : <Navigate to="/" />} />;
-                <Route path="product" element={<Product />}>
+                <Route path="product" element={ isLoggedIn ? <Product /> : <Navigate to="/" />}>
                   <Route index element={<AllProducts />} />
                   {/* <Route path="allProducts" element={<AllProducts />} /> */}
                   <Route path="featuredProducts" element={<FeaturedProducts />} />
@@ -120,9 +122,6 @@ const App = () => {
                 </Route>
                 <Route path="product/productDetails/:id" element={<ProductDetails />} />
               </Routes>
-            </div>
-            <div className='footer bg-dark p-5'>
-              <label className='text-white'>Copy right</label>
             </div>
           </div>
         </div>

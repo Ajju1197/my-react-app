@@ -59,7 +59,7 @@ function Signup() {
             <div className='signUpFormBlock card'>
                 <div className='registerForm'>
                     <div>
-                        <h4 className='text-primary'>Registration Form</h4>
+                        <h4 className='textClass'>Registration Form</h4>
                     </div>
                     <form method='POST' name="register-form" id="register-form" className='registerForm'>
                         <div className='form-group mt-3'>
@@ -87,7 +87,7 @@ function Signup() {
                             <label>Confirm Password</label>
                         </div>
                         <div className='form-group mt-3'>
-                            <input type="submit" name="register" id="register" className='btn btn-primary' onClick={hadleRegisterClick} value="Register" />
+                            <input type="submit" name="register" id="register" className='btn btn-dark' onClick={hadleRegisterClick} value="Register" />
                         </div>
                     </form>
                 </div>
@@ -96,7 +96,7 @@ function Signup() {
                         <img src={formImg} alt="form-image" loading='lazy'/>
                     </div>
                     <div className='alreadyRegisteredUser'>
-                        <Link to="/" className='text-primary'>I am already registered</Link>
+                        <Link to="/" className='textClass'>I am already registered</Link>
                     </div>
                 </div>
             </div>

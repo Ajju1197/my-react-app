@@ -1,20 +1,28 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import myProfile from '../images/ajjuProfile.jpg'
-import myProfile1 from '../images/syed.jpeg';
-import './PagesStyles.css'
+import './PagesStyles.css';
+import Typed from 'react-typed';
+import { AiOutlineDoubleRight } from "react-icons/ai";
 
-const Home = () => {
+
+const Home = ({isLoggedIn}) => {
+    const technologies = ['MERN','MONGO DB','EXPRESS JS','REACT','NODE JS']
     const navigate = useNavigate();
     return (
         <div className="homePageClass">
             <div className="main-block">
-                {/* <img src={myProfile1} alt='Syed'/> */}
-                <h2 className="homePageTitle">Home Page</h2>
-                <p>This is the home page where you can learn.</p>
+                <div className="headingBlock">
+                    <h1 className="homePageTitle">SYED AJMATHULLA</h1>
+                    <p className="subHeading">I am a <Typed className="mernClass" strings={technologies}
+                    typeSpeed={100}
+                    backSpeed={100}
+                    loop /> Developer</p>
+                </div>
+                <div className="aboutMeBtn">
+                    <AiOutlineDoubleRight className="rightArrowIcon"/>
+                    {isLoggedIn ? <a onClick={()=>navigate('/about')} className='aboutLoginBtn'>ABOUT ME</a> : <a onClick={()=>navigate('/')} className='aboutLoginBtn'>LOGIN</a>}
+                </div>
             </div>
-            <div className="overlay"></div>
-            {/* <button className="btn btn-primary" onClick={() => navigate('orderSummary')}>Place Order</button> */}
         </div>
     );
 }
