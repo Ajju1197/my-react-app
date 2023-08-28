@@ -1,42 +1,258 @@
 /* Home Page Styling */
 
-.homePageClass{
+.homePageClass {
+    padding-top: 6em;
     position: relative;
-    height: 92vh;
-    background-size: cover;
+    height: 100vh;
+    background-size: 40%;
     background-repeat: no-repeat;
-    background-attachment:fixed;
-    background-image: url(../images/syed.jpeg);
+    background-attachment: fixed;
+    background-position: right center;
+    background-image: url(../images/SyedAjmath.jpg);
 }
-.main-block{
-    background-color: #2ed484;
+
+.homePageClass::before {
+    content: "";
+    background: rgba(5, 13, 24, 0.3);
     position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
     right: 0;
+    z-index: 1;
+}
+
+.main-block {
+    background-color: #040b14;
+    position: absolute;
+    left: 0;
     top: 0;
     height: 100%;
-    width: 50%;
+    width: 62%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 99;
 }
 
-.main-block img{
-    height: 100%;
-    width: 100%;
-    /* object-fit: cover; */
+/* color: rgb(4,64,71); */
+.homePageTitle {
+    color: rgb(247, 220, 79);
+    font-size: 4em;
+    font-weight: 200;
+    word-spacing: 4px;
+    line-height: 56px;
+    font-family: 'Red Hat Display', sans-serif;
+    pointer-events: none;
 }
-.overlay{
+
+.mernClass {
+    color: rgb(247, 220, 79);
+}
+
+.subHeading {
+    color: aqua;
+    line-height: 43px;
+}
+
+.headingBlock {
+    text-align: left;
+    pointer-events: none;
+}
+
+.aboutMeBtn {
+    position: absolute;
+    left: 50%;
+    bottom: 60px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 255, 255, 0.34);
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.5s ease-in;
+}
+
+.aboutMeBtn:hover {
+    transition: all 0.5s ease-in;
+    background-color: rgb(45, 48, 48);
+}
+
+.aboutMeBtn::after {
+    content: '';
+    position: inherit;
+    bottom: 0px;
+    left: 0px;
+    height: 3px;
+    width: 100%;
+    background-color: aqua;
+}
+
+.aboutLoginBtn {
+    color: aqua !important;
+    letter-spacing: 6px;
+    margin-left: 10px;
+}
+
+.rightArrowIcon {
+    color: aqua;
+    font-size: 20px;
+    animation: moveToRightAndLeft 1s infinite alternate-reverse both;
+}
+
+@keyframes moveToRightAndLeft {
+    0% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+/* AboutPage Styling */
+.aboutPageClass,
+.userProfilePageClass,
+.product {
+    padding: 6em 10px;
+}
+.about_card_block{
+    display: flex;
+    gap: 10px;
+    width: calc(100vw - 50%);
+    margin: auto;
+    flex-direction: row;
+}
+
+.about_left_block{
+    flex: 1 0 50%;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+}
+.about_left_block::after{
+    content: '';
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.about_right_block{
+    flex: 1 0 50%;
+}
+.about_left_block img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scale: 1.2;
 }
 
-.homePageTitle{
-    color: rgb(4,64,71);
-    color: rgb(247,220,79);
+/* Products Styling */
+.productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.searchClass {
+    width: 30%;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.productTabsClass {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.product .active {
+    background-color: aqua !important;
+    color: #fff !important;
+}
+
+.productsClass {
+    text-decoration: none;
+    justify-content: space-between;
+}
+
+.productsClass .title {
+    padding: 10px;
+}
+
+.productsClass .title h1 {
+    max-width: 200px;
+    text-align: left;
+    font-size: 17px;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.productsClass .title p {
+    display: -webkit-box;
+    /* max-width: 200px; */
+    font-size: 16px;
+    -webkit-line-clamp: 2;
+    font-size: 13px;
+    color: #000;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+}
+
+.productImage {
+    height: 400px;
+    width: 100%;
+    border-bottom: 1px solid;
+    padding: 10px 0px;
+    overflow: hidden;
+}
+
+.productImage img {
+    transition: 0.5s all ease-in;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.social-icons {
+    position: absolute;
+    top: 0px;
+    right: -500px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    transition: 0.5s all ease-in-out;
+}
+
+.productCart {
+    position: relative;
+    overflow: hidden;
+}
+
+.productImage:hover img {
+    scale: 0.9;
+    transition: 0.5s all ease-in;
+}
+
+.productCart:hover .social-icons {
+    right: 0px;
+    transition: 0.5s all ease-in;
+}
+
+.iconsStylingClass {
+    color: white;
+    font-size: 25px;
 }

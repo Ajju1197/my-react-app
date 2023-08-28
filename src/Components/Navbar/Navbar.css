@@ -1,7 +1,23 @@
+.profileIconWithEmail{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.emailColorDarkClass{
+    cursor: pointer;
+    color: #ffffff;
+}
+.emailColorWhiteClass{
+    cursor: pointer;
+    color: #ffffff;
+}
+
 .ProfileUser{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
 }
 .ProfileUser img{
     height: 100%;
@@ -9,4 +25,153 @@
 }
 .profileClass{
     gap: 10px;
+}
+.profileClass > div > a{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff !important;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+.profileClass > div:hover > a{
+    transition: all 0.5s ease-in-out;
+}
+.profileClass > div > a::after{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    left: 20px;
+    background-color: #000000;
+    transition: all 0.5s ease-in-out;
+}
+.profileClass > div:hover > a::after{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: all 0.5s ease-in-out;
+}
+.profileClass > div > a.active{
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+.profileClass > div > a.active::before{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: all 0.5s ease-in-out;
+}
+.homeProfileClass > div > a{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff !important;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+.homeProfileClass > div:hover > a{
+    transition: all 0.5s ease-in-out;
+}
+.homeProfileClass > div > a::after{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    left: 20px;
+    background-color: rgb(247,220,79);
+    transition: all 0.5s ease-in-out;
+}
+.homeProfileClass > div:hover > a::after{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 2px;
+    background-color: rgb(247,220,79);
+    transition: all 0.5s ease-in-out;
+}
+.homeProfileClass > div > a.active{
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+.homeProfileClass > div > a.active::before{
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 2px;
+    background-color: rgb(247,220,79);
+    transition: all 0.5s ease-in-out;
+    color: #ffffff !important;
+}
+.logo{
+    font-weight: 400;
+    font-size: 2em;
+    letter-spacing: 5px;
+    line-height: 1.2em;
+    text-indent: 7px;
+}
+.sphereClass{
+    letter-spacing: 15px;
+    background-color: aqua;
+    text-indent: 7px;
+}
+
+.dropdownClass{
+    position: relative;
+    transition: all 0.5s ease-in;
+    /* overflow: hidden; */
+}
+.dropdownClass:hover > .dropDown{
+    transition: all 0.5s ease-in;
+    opacity: 1;
+    top:50px
+}
+/* .dropdownClass:hover{
+    transition: all 0.5s ease-in;
+    overflow: visible;
+} */
+
+.dropDown{
+    width: 100%;
+    position: absolute;
+    top: -50px;
+    transition: all 0.5s ease-in-out;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    /* padding: 5px; */
+    opacity: 0;
+    border-radius: 5px;
+}
+
+.dropDownList{
+    display: flex;
+    align-items: flex-start;
+    padding: 0px;
+    margin: 0px;
+    flex-direction: column;
+}
+.dropDownList li{
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+.dropDownList li > a{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }

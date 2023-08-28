@@ -30,7 +30,7 @@ function Login({onLogin}) {
             <div className='signUpFormBlock card'>
                 <div className='registerForm'>
                     <div>
-                        <h4 className='text-primary'>Login Form</h4>
+                        <h4 className='textClass'>Login Form</h4>
                     </div>
                     <form onSubmit={handleSubmit} name="register-form" id="register-form" className='registerForm'>
                         <div className='form-group mt-3'>
@@ -51,7 +51,7 @@ function Login({onLogin}) {
                         <img src={formImg} alt="form-image" loading='lazy' />
                     </div>
                     <div className='alreadyRegisteredUser'>
-                        <Link to="/register" className='text-primary'>Register</Link>
+                        <Link to="/register" className='textClass'>Register</Link>
                     </div>
                 </div>
             </div>
