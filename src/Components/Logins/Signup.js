@@ -1,57 +1,69 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import formImg from '../../images/details-1.png'
+import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
 import './LoginSignUp.css'
-import toast from 'react-hot-toast';
+import { useSignup } from '../../Hooks/useSignup';
+import DetailCard from '../DetailCard';
 
 function Signup() {
 
-    const navigate = useNavigate();
-    const [user, setUser] = useState({
+    const inputRef = useRef();
+    const { signup, isError } = useSignup();
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [isAuthorized, setIsAuthorized] = useState(true);
+
+    const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
         work: "",
         password: "",
         cpassword: "",
+        profileImage: "",
     });
 
-    let name, value;
-    const hadleInputs = (e) => {
-        console.log(e);
-        name = e.target.name;
-        value = e.target.value;
-
-        setUser({ ...user, [name]: value })
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     }
 
-    const hadleRegisterClick = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, phone, work, password, cpassword } = user;
 
-        const fetchRes = await fetch('/register', {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                phone: phone,
-                work: work,
-                password: password,
-                cpassword: cpassword
-            })
-        })
+        const formDataObj = new FormData();
+        
+        formDataObj.append('name', formData.name);
+        formDataObj.append('email', formData.email);
+        formDataObj.append('phone', formData.phone);
+        formDataObj.append('work', formData.work);
+        formDataObj.append('password', formData.password);
+        formDataObj.append('cpassword', formData.cpassword);
+        formDataObj.append('profileImage', formData.profileImage);
+        
+        await signup(formDataObj);
+    }
 
-        const data = await fetchRes.json();
-
-        if (fetchRes.status === 422 || !data) {
-            toast.error('Invalid Credentials!');
-            return;
+    const handleImageClick = () => {
+        if(isAuthorized){
+            inputRef.current.click();
         }
-        toast.success('Successfully Registered!');
-        navigate('/');
+    }
+
+    const handleImageChange = (e) => {
+        const fileSelected = e?.target?.files[0];
+        setSelectedImage(fileSelected);
+        setFormData({...formData, profileImage: fileSelected});
+    }
+
+    const signUpUserDetails = {
+        isAuthorized,
+        selectedImage,
+        formData,
+        handleImageClick,
+        inputRef,
+        isError,
+        handleSubmit,
+        handleInputChange,
+        handleImageChange,
     }
 
     return (
@@ -61,40 +73,12 @@ function Signup() {
                     <div>
                         <h4 className='textClass'>Registration Form</h4>
                     </div>
-                    <form method='POST' name="register-form" id="register-form" className='registerForm'>
-                        <div className='form-group mt-3'>
-                            <input type='text' value={user.name} onChange={hadleInputs} placeholder=' ' className='form-control' name="name" id="name" autoComplete='off' />
-                            <label>Name</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type='email' value={user.email} onChange={hadleInputs} placeholder=' ' className='form-control' name="email" id="email" autoComplete='off' />
-                            <label>Email</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type='text' value={user.phone} onChange={hadleInputs} placeholder=' ' className='form-control' name="phone" id="phone" autoComplete='off' />
-                            <label>Phone</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type='text' value={user.work} onChange={hadleInputs} placeholder=' ' className='form-control' name="work" id="work" autoComplete='off' />
-                            <label>Work</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type='password' value={user.password} onChange={hadleInputs} placeholder=' ' className='form-control' name="password" id="password" autoComplete='off' />
-                            <label>Password</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type='password' value={user.cpassword} onChange={hadleInputs} placeholder=' ' className='form-control' name="cpassword" id="cpassword" autoComplete='off' />
-                            <label>Confirm Password</label>
-                        </div>
-                        <div className='form-group mt-3'>
-                            <input type="submit" name="register" id="register" className='btn btn-dark' onClick={hadleRegisterClick} value="Register" />
-                        </div>
-                    </form>
+                    <DetailCard  signUpUserDetails={signUpUserDetails}/>
                 </div>
                 <div className=''>
-                    <div className='formImg'>
-                        <img src={formImg} alt="form-image" loading='lazy'/>
-                    </div>
+                    {/* <div className='formImg'>
+                        <img src={formImg} alt="form-image" loading='lazy' />
+                    </div> */}
                     <div className='alreadyRegisteredUser'>
                         <Link to="/" className='textClass'>I am already registered</Link>
                     </div>

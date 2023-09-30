@@ -1,132 +1,107 @@
-import logo from './logo.svg';
-import './App.css';
-import Home from './Pages/Home';
-import About from './Pages/About';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import SideNav from './Components/SideNav';
-import Product from './Pages/Products/Product';
-import Navbar from './Components/Navbar/Navbar';
-import OrderSummary from './Components/OrderSummary';
-import AllProducts from './Pages/Products/AllProducts';
-import FeaturedProducts from './Pages/Products/FeaturedProducts';
-import NewProducts from './Pages/Products/NewProducts';
-import ProductDetails from './Pages/Products/ProductDetails';
-import SignUp from './Components/Logins/Signup';
-import { useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Login from './Components/Logins/Login';
-import toast, { Toaster } from 'react-hot-toast';
-import ScrollToTop from './Components/ScrollToTop';
-import UserProfile from './Pages/UserProfile';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import './App.css';
+import './Contexts/useAxios';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { ToastContainer } from 'react-toastify';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
+import { useAuthContext } from './Hooks/useAuthContext';
+import { Routes, Route, Navigate, useNavigate, Outlet } from 'react-router-dom';
+import logo from './logo.svg';
+import LoadingSpinner from './Components/LoadingSpinner';
+
+const Home =  React.lazy(() => import('./Pages/Home'));
+const About =  React.lazy(() => import('./Pages/About'));
+const SideNav =  React.lazy(() => import('./Components/SideNav'));
+const Product =  React.lazy(() => import('./Pages/Products/Product'));
+const Navbar =  React.lazy(() => import('./Components/Navbar/Navbar'));
+const AllProducts =  React.lazy(() => import('./Pages/Products/AllProducts'));
+const FeaturedProducts =  React.lazy(() => import('./Pages/Products/FeaturedProducts'));
+const NewProducts =  React.lazy(() => import('./Pages/Products/NewProducts'));
+const ProductDetails =  React.lazy(() => import('./Pages/Products/ProductDetails'));
+const SignUp =  React.lazy(() => import('./Components/Logins/Signup'));
+const Login =  React.lazy(() => import('./Components/Logins/Login'));
+const ScrollToTop =  React.lazy(() => import('./Components/ScrollToTop'));
+const UserProfile =  React.lazy(() => import('./Pages/UserProfile'));
+const PageNotFound =  React.lazy(() => import('./Components/PageNotFound'));
+const AllSignUpUsers =  React.lazy(() => import('./Pages/AllSignUpUsers'));
+const SignUpUserDetail =  React.lazy(() => import('./Pages/SignUpUserDetail'));
+const Settings =  React.lazy(() => import('./Pages/Settings'));
+const Blogs =  React.lazy(() => import('./Pages/BlogPosts/Blogs'));
+const BlogDetails =  React.lazy(() => import('./Pages/BlogPosts/BlogDetails'));
+const PostBlogs =  React.lazy(() => import('./Pages/BlogPosts/PostBlogs'));
 
 const App = () => {
 
-  const navigate = useNavigate();
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [showSideNav, setShowSideNav] = useState(false);
+  const {user} = useAuthContext();
   
   // this Code is to Show Hide the sideNavBar.
   const toggleSideNav = () => {
     setShowSideNav(!showSideNav)
   }
-
-  // Login functionality
-  const handleLogin = async (email, password) => {
-    const res = await fetch('/signin', {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
-    });
-
-    const data = await res.json();
-
-    if (res.status === 400 || !data) {
-      toast.error('Please fill the form details.');
-      return;
+  
+  useEffect(() => {
+    const LoginUser = JSON.parse(localStorage.getItem('user'));
+    if(LoginUser) window.document.title = `MERN | ${LoginUser.user.name}`;
+    if(!user){
+      setShowSideNav(false);
     }
+  },[user])
 
-    setLoggedIn(true);
-    navigate('/home')
-    toast.success('Login Successful!');
+  const toasterStyle = {
+    zIndex:99999,
   }
-
-  // Logout functionality
-  const handleLogout = async () => {
-    try {
-      const res = await fetch('/logout', {
-        method: 'POST', // or 'PUT'
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-      });
-      console.log(`From App.js ${res}`);
-      const data = await res.json();
-      console.log(`From App.js ${data}`);
-      setLoggedIn(false);
-      toast.success('Logged Out Successful!');
-      navigate('/')
-    } catch (error) {
-      console.error(error + ' ' + 'From App.js');
-      toast.error(error);
-    }
-  };
-
-
   return (
     <div className={showSideNav ? 'App' : 'withOutSideNavAppClass'}>
       <ScrollToTop/>
-      <Toaster position='top-right'
-        toastOptions={{
-          // Default options for specific types
-          success: {
-            duration: 3000,
-            theme: {
-              primary: 'green',
-              secondary: 'black',
-            },
-          },
-        }}
-      />
+      <ToastContainer 
+      position="top-right"
+      autoClose={5000}
+      closeOnClick
+      rtl={false}
+      draggable
+      pauseOnHover
+      theme="light"/>
       <div className='appSideNavBodyContentClass'>
-        <div className={showSideNav ? 'sideNavWidthClass' : 'sideNavHideClass'}>
-          <SideNav showSideNav={showSideNav} toggleSideNav={toggleSideNav} />
-        </div>
-        <div className={showSideNav ? 'right-block' : 'rightBlockWithoutSideNav'}>
           <div className='Header'>
-            <Navbar toggleSideNav={toggleSideNav} handleLogout={handleLogout} showSideNav={showSideNav} isLoggedIn={isLoggedIn} />
+            <Navbar toggleSideNav={toggleSideNav} showSideNav={showSideNav} />
           </div>
-          <div className='mainBody'>
-            <div className='content'>
-              <Routes>
-                <Route path="/home" exact element={<Home isLoggedIn={isLoggedIn}/>} />;
-                <Route path="/userProfile" exact element={<UserProfile isLoggedIn={isLoggedIn}/>} />;
-                <Route path="/" element={<Login onLogin={handleLogin} />} />;
-                {/* <Route path="orderSummary" element={<OrderSummary />} /> */}
-                <Route path="/about" element={isLoggedIn ? <About /> : <Navigate to="/" />} />;
-                <Route path="/register" element={!isLoggedIn ? <SignUp /> : <Navigate to="/" />} />;
-                <Route path="product" element={ isLoggedIn ? <Product /> : <Navigate to="/" />}>
-                  <Route index element={<AllProducts />} />
-                  {/* <Route path="allProducts" element={<AllProducts />} /> */}
-                  <Route path="featuredProducts" element={<FeaturedProducts />} />
-                  <Route path="newProducts" element={<NewProducts />} />
-                </Route>
-                <Route path="product/productDetails/:id" element={<ProductDetails />} />
-              </Routes>
-            </div>
+          <div className={showSideNav ? 'sideNavWidthClass' : 'sideNavHideClass'}>
+            <SideNav toggleSideNav={toggleSideNav} showSideNav={showSideNav} />
           </div>
+        <div className={showSideNav ? 'right-block' : 'rightBlockWithoutSideNav'}>
+              <div className='content'>
+                <Suspense fallback={<LoadingSpinner/>}>
+                  <Routes>
+                    <Route path="/home" element={<Home/>} />;
+                    <Route path="/allSignUpUsers" element={user ? <AllSignUpUsers/> : <Navigate to="/"/>} />;
+                    <Route path="/blogs" element={user ? <Blogs/> : <Navigate to="/"/>} />;
+                    <Route path="/postBlog" element={user ? <PostBlogs/> : <Navigate to="/"/>} />;
+                    <Route path="/blogDetails/:id" element={user ? <BlogDetails/> : <Navigate to="/"/>} />;
+                    <Route path="/userDetails/:id" element={user ? <SignUpUserDetail/> : <Navigate to="/"/>} />;
+                    <Route path="/userProfile" exact element={user ? <UserProfile/> : <Navigate to="/"/>} />;
+                    <Route path="/setting" exact element={user ? <Settings/> : <Navigate to="/"/>} />;
+                    <Route path="/" exact element={ user ? <Home/> :  <Login/>}/>;
+                    {/* <Route path="orderSummary" element={<OrderSummary />} /> */}
+                    <Route path="/about" element={user ? <About /> : <Navigate to="/" />} />;
+                    <Route path="/register" element={!user ? <SignUp /> : <Navigate to="/" />} />;
+                    <Route path="product" element={ user ? <Product /> : <Navigate to="/" />}>
+                      <Route index element={<AllProducts />} />
+                      <Route path="featuredProducts" element={<FeaturedProducts />} />
+                      <Route path="newProducts" element={<NewProducts />} />
+                    </Route>
+                    <Route path="product/productDetails/:id" element={<ProductDetails />} />
+                    <Route path="*" element={<PageNotFound/>}/>
+                  </Routes>
+                </Suspense>
+              </div>
         </div>
       </div>
-      {isLoggedIn ? (
+      {user ? (
         <div className={showSideNav ? 'SideNavOpenIconHide' : 'SideNavOpenClass'} onClick={toggleSideNav}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} />
         </div>) :

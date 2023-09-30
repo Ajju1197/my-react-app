@@ -141,6 +141,7 @@
 
 .dropDown{
     width: 100%;
+    right: 0px;
     position: absolute;
     top: -50px;
     transition: all 0.5s ease-in-out;
@@ -157,6 +158,7 @@
     padding: 0px;
     margin: 0px;
     flex-direction: column;
+    color: #000;
 }
 .dropDownList li{
     list-style: none;
@@ -174,4 +176,35 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+}
+
+/* search Class */
+.searchInputClass{
+    display: flex;
+    position: relative;
+    transition: all 0.5s ease-in;
+}
+.searchImg{
+    background-color: aqua;
+    border-radius: 100%;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    transition: all 0.5s ease-in;
+}
+.searchInputClass > input{
+    opacity: 0;
+    transition: all 0.5s ease-in;
+    border-radius: 18px;
+    padding: 7px 10px;
+}
+.searchInputClass:hover > input{
+    opacity: 1;
+    transition: all 0.5s ease-in;
 }

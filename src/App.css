@@ -1,16 +1,9 @@
+@import 'index.css';
+
 .App {
   text-align: center;
   position: relative;
   height: 100vh;
-}
-
-.Header{
-  position: fixed;
-  background-color: transparent;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
 }
 
 .withOutSideNavAppClass {
@@ -23,36 +16,39 @@
   position: fixed;
   left: 0px;
   top: 10px;
-  background-color: aqua;
-  color: #040b14;
+  background-color: var(--light);
+  color: var(--primary);
   font-size: 20px;
   cursor: pointer;
   padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  z-index: 1000;
+  z-index: 10002;
   transition: all 0.4s ease-in-out;
 }
 
 .SideNavOpenIconHide{
   position: fixed;
   left: 0px;
-  background-color: aqua;
+  background-color: var(--light);
+  color: var(--primary);
   top: 10px;
-  color: #040b14;
   font-size: 20px;
-  z-index: 1000;
+  z-index: 10002;
   cursor: pointer;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   transition: all 0.4s ease-in-out;
   rotate: 180deg;
   padding: 10px;
 }
 
 .appSideNavBodyContentClass{
+  background-color: var(--primary);
+  color: var(--light);
   display: flex;
-  height: 100%;
   justify-content: flex-end;
-  /* background-color: #040b14; */
+  height: 100vh;
 }
 
 .App-logo {
@@ -67,23 +63,6 @@
   }
 }
 
-.App-header{
-  display: flex;
-  padding: 10px;
-  align-items: center;
-  background-color: darkblue;
-  color: #fff;
-  justify-content: space-between;
-}
-.App-link {
-  color: #61dafb;
-}
-.App-List{
-  list-style:none;
-  display: flex;
-  gap: 10px;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -96,37 +75,84 @@
 /* Side Nav */
 .sideNavLinks{
   display: flex;
-  justify-content: space-between;
   color: #fff !important;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+  gap: 10px;
+  align-items: center;
   text-decoration: none;
 }
 .sideNavLinks a{
   text-decoration: none;
   color: #fff;
+  transition:.5s ease-in-out all;
 }
-.sideNavLinks:hover{
+.sideNavLinks:hover,.sideNavLinks.active{
   color: #fff;
+  background-color: #ffffff5d;
+  border-radius: 8px;
+  transition:.5s ease-in all;
+}
+.sideNavTitleClass{
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgb(247, 220, 79);
+}
+.sideNavSubHeading{
+  font-size: 1rem;
+  color: aqua;
+  text-align: left;
+  margin: 5px 0px;
+}
+.Header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 .sideNavWidthClass{
-  height: 91%;
-  background-color: aqua;
-  width: 20%;
+  z-index: 999;
+  height: 100%;
+  padding: 5rem 0;
+  padding-bottom: 0px !important;
+  background-color: var(--primary);
   position: fixed;
   left: 0;
+  width: 13%;
+  max-width: 13%;
   bottom: 0;
   transition:.4s ease-in all;
-  /* box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.5); */
+  /* border-right: 1px solid #ccc; */
+  box-shadow: rgba(253, 252, 252, 0.15) 2.4px 2.4px 3.2px;
 }
 .sideNavHideClass{
-  background-color: aqua;
+  padding-top: 5rem;
+  background-color: var(--primary);
+  height: 100%;
   position: fixed;
   bottom: 0;
   left: -500px;
-  height: 91%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   transition:.4s ease-in-out all;
-  z-index: 999;
+}
+.right-block{
+  transition: 0.5s all ease-in;
+  width: 87%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding-top: 5rem;
+}
+.rightBlockWithoutSideNav{
+  transition: 0.5s all ease-out;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+}
+.content{
+  width: 100%;
 }
 .links:has(.active){
   padding: 10px 20px;
@@ -142,21 +168,6 @@
   color: #000;
 }
 
-.right-block{
-  transition: 0.5s all ease-out;
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  /* background-color: #CBF7FF; */
-  background-color: #00375E;
-}
-.rightBlockWithoutSideNav{
-  background-color: #00375E;
-  width: 100%;
-  /* transition: all 0.5s ease-out; */
-}
-
 
 /* Webkit browsers (Safari, Chrome, Edge) */
 ::-webkit-scrollbar {
@@ -164,7 +175,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: aqua; /* Color of the scrollbar thumb */
+  background-color: var(--primary); /* Color of the scrollbar thumb */
   border-radius: 5px; /* Rounded corners for the thumb */
 }
 

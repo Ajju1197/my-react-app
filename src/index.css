@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +9,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root{
+  /* for bg */
+  --primary: #010141;
+  --light:#ffffff;
+  --dark:#000000;
+  --lime:rgb(61, 245, 61);
+  --red: rgba(248, 12, 12, 0.949);
 }
 
 code {
@@ -19,6 +32,9 @@ h1,h2,h3,h4,h5,h6{
 a{
   color: #000 !important;
   text-decoration: none;
+}
+.content,.mainBody{
+  height: 100%;
 }
 
 /* Scrolling Css */
@@ -75,7 +91,7 @@ a{
   justify-content: center;
   align-items: center;
   position: fixed;
-  background: rgba(0, 0, 0, 0.834);
+  background: var(--primary);
   z-index: 1;
 }
 
@@ -138,3 +154,49 @@ a{
     height: 5em;
   }
 }
+
+/* styles.css */
+.fade-enter {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+.mernInputStyleClass{
+  display: flex;
+  align-items: center;
+}
+
+.mernInputStyleClass input,textarea{
+  border: none;
+  background-color: transparent;
+  padding: 5px 10px;
+  resize: none;
+  color: #fff;
+  outline: none;
+}
+.mernInputStyleClass input:focus,
+.mernInputStyleClass textarea:focus{
+  outline: none;
+  border: 1px solid aqua;
+  color: #fff;
+  box-shadow: none;
+  background-color: transparent;
+}
+.mernInputStyleClass input[disabled]{
+  color: #fff;
+  /* border: 1px solid aqua; */
+  background-color: transparent;
+}
+

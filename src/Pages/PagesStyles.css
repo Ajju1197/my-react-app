@@ -1,9 +1,28 @@
 /* Home Page Styling */
-
+.registerForm{
+    isolation: isolate;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+.signUpUserDetailsFieldsClass{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+.registerFormBlock{
+    width: 80%;
+}
+.homePageClass,.aboutPageClass,.product,.userProfilePageClass,.allBlogsPageClass,.blogDetailsPageClass{
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+}
 .homePageClass {
-    padding-top: 6em;
     position: relative;
-    height: 100vh;
+    height: 100%;
     background-size: 40%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -23,7 +42,8 @@
 }
 
 .main-block {
-    background-color: #040b14;
+    /* background: linear-gradient(to right, #151516, #3c3e40, #666c6c, #979d9a, #151516); */
+    background-color: var(--primary);
     position: absolute;
     left: 0;
     top: 0;
@@ -33,6 +53,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+    gap: 2em;
 }
 
 /* color: rgb(4,64,71); */
@@ -46,6 +68,16 @@
     pointer-events: none;
 }
 
+.aboutMeBtn .btns{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.btns .orClass{
+    color: aqua;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
 .mernClass {
     color: rgb(247, 220, 79);
 }
@@ -61,26 +93,26 @@
 }
 
 .aboutMeBtn {
-    position: absolute;
     left: 50%;
+    display: flex;
+    gap: 10px;
     bottom: 60px;
     z-index: 3;
     display: flex;
     align-items: center;
-    border: 1px solid rgba(0, 255, 255, 0.34);
     cursor: pointer;
     padding: 10px;
     transition: all 0.5s ease-in;
 }
 
-.aboutMeBtn:hover {
+.aboutLoginBtn:hover {
     transition: all 0.5s ease-in;
-    background-color: rgb(45, 48, 48);
+    background-color: var(--primary);
 }
 
-.aboutMeBtn::after {
+.aboutLoginBtn::after {
     content: '';
-    position: inherit;
+    position: absolute;
     bottom: 0px;
     left: 0px;
     height: 3px;
@@ -91,7 +123,12 @@
 .aboutLoginBtn {
     color: aqua !important;
     letter-spacing: 6px;
-    margin-left: 10px;
+    padding: 10px;
+    display: flex;
+    position: relative;
+    border: 1px solid rgba(0, 255, 255, 0.34);
+    align-items: center;
+    gap: 10px;
 }
 
 .rightArrowIcon {
@@ -111,42 +148,74 @@
 }
 
 /* AboutPage Styling */
-.aboutPageClass,
-.userProfilePageClass,
-.product {
-    padding: 6em 10px;
-}
 .about_card_block{
     display: flex;
-    gap: 10px;
-    width: calc(100vw - 50%);
-    margin: auto;
-    flex-direction: row;
-}
-
-.about_left_block{
-    flex: 1 0 50%;
-    overflow: hidden;
-    height: 100%;
-    position: relative;
-}
-.about_left_block::after{
-    content: '';
-    position: absolute;
-    height: 100%;
     width: 100%;
-    top: 0;
+    margin: auto;
+    flex-direction: column;
+}
+.aboutBgImg{
+    width: 100%;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 12px 30px -20px #ffffff91;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    top:0;
+    /* background-color: rgba(0, 0, 0, 0.4); */
 }
-.about_right_block{
-    flex: 1 0 50%;
-}
-.about_left_block img{
+.aboutBgImg img{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    scale: 1.2;
+}
+.profileIconImage{
+    position: absolute;
+    z-index: 2;
+    left: 20px;
+    bottom: -75px;
+    height: 150px;
+    border-radius: 4px;
+    width: 150px;
+    border: 5px solid #fff;
+    overflow: hidden;
+}
+.profileIconImage img{
+    border-radius: 4px;
+    scale: 1.1;
+}
+.mernClass{
+    width: 100%;
+    position: relative;
+    z-index: 4;
+}
+.App-logo{
+    margin: auto;
+}
+.mernClass h1{
+    letter-spacing: 2rem;
+    font-size: 8rem !important ;   /* font size */
+    font-weight: 200;
+}
+.mernClass span:nth-child(1){
+    color: #00ED64;
+}
+.mernClass span:nth-child(2){
+    color: #e91e63;
+}
+.mernClass span:nth-child(3){
+    color: aqua;
+}
+.mernClass span:nth-child(4){
+    color: #00ED64;
 }
 
 /* Products Styling */
@@ -254,5 +323,272 @@
 
 .iconsStylingClass {
     color: white;
-    font-size: 25px;
+    font-size: 18px;
+}
+
+/* getAllUserDataClass */
+.getAllUserDataClass{
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    flex-wrap: wrap;
+    /* height: 100%; */
+    overflow-y: auto;
+}
+.successClass{
+    background-color: rgba(0, 255, 255, 0.466);
+    color: var(--dark);
+}
+.noSuccessClass{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.signupUserSecondRowBlock{
+    width: 100%;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit,minmax(16%, 16%));
+    /* grid-template-rows:minmax(300px, 300px); */
+}
+.getUserCardClass{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    align-items: center;
+    transition: all 0.5s ease-in;
+    position: relative;
+    z-index: 2;
+    padding: 7px;
+}
+.activeUser{
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    height: 10px;
+    width: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 255, 0, 0.668);
+    color: #ffffff;
+    background-color: var(--lime);
+    padding: 0px 5px;
+    border-radius: 8px;
+    border-radius: 50%;
+}
+.nonActiveUser{
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    height: 10px;
+    width: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(255, 0, 0, 0.821);
+    color: #ffffff;
+    background-color: var(--red);
+    padding: 0px 5px;
+    border-radius: 50%;
+}
+.overlaycard{
+    position: absolute;
+    clip-path: circle(6.9% at 100% 100%);
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.card-left-block,.card-right-block{
+    position: relative;
+    z-index: 1;
+    height: 100%;
+}
+.card-left-block{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.card-left-block img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.getUserCardClass:hover .overlaycard{
+    transition: all 0.5s ease-in;
+    clip-path: circle(73.8% at 48% 52%);
+    background-color: rgba(0, 255, 255, 0.781);
+}
+.trashIconClass{
+    color: rgb(237, 63, 63);
+    font-size: 20px;
+}
+.card-right-block{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    color: #ffffff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+.allSignUpUsersActionIconClass{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.allSignUpUsersActionIconClass a{
+    padding: 10px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.allSignUpUsersActionIconClass a svg path{
+    stroke: #ffffff !important;
+}
+.userHeadingClass{
+    width: 100%;
+    text-align: left;
+}
+.userHeadingClass h2{
+    font-size: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+.userHeadingClass small{
+    text-align: left;
+    text-transform: capitalize;
+}
+
+/* Signup user details */
+.signupUserDetailsPageClass{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+/* .signupUserDetailsPageClass::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../images/moutain-2.jpg) center/cover no-repeat fixed;
+    background: url(../images/moutain-14.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    filter: blur(4px);
+} */
+
+.userProfile{
+    position: relative;
+}
+.userImage{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 7px solid var(--lime);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+.userImage > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.editIcon{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    width: 30px;
+    cursor: pointer;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #000;
+}
+.imageUpload{
+    position: inherit;
+    bottom: 9px;
+    left: 8px;
+}
+.postBlogsClass{
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
+    gap: 10px;
+}
+.blogCard{
+    background-color: #fff;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    overflow: hidden;
+}
+.blogImg{
+    height: 300px;
+    width: 100%;
+}
+.blogImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.blog-likes{
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+.blog-likes > span{
+    padding: 5px 16px;
+    border-right: 1px solid #ccc;
+    border-bottom: none;
+    cursor: pointer;
+}
+.blog-info{
+    color: #000;
+    text-align: left;
+    padding: 5px 8px;
+}
+.blog-info h1{
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+/* blogDetailsPageClass */
+.blogDetailsPageClass{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.blogDetailsShowSingleBlog{
+    flex: 1 0 70%;
+    overflow: auto;
+    background-color: #000;
+}
+.blogDetailsShowSingleBlog .blogDetailsImage{
+    height: 400px;
+    width: auto;
+}
+.blogDetailsShowSingleBlog .blogDetailsImage img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.blogDetailsShowAllBlogs{
+    flex: 1 0 29%;
+    padding: 10px;
+    color: #000;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.blogDetailsShowAllBlogsBLock{
+    
 }
