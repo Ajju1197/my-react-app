@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetUserData } from "./useGetUsersData";
+import { useAxios } from "../Contexts/useAxios";
 
 const { useState } = require("react");
 const { useAuthContext } = require("./useAuthContext");
@@ -11,24 +12,17 @@ export const useLogin = () => {
     const {dispatchFromAuth} = useAuthContext();
     const {getAllUsersData} = useGetUserData();
     const navigate = useNavigate();
+    const axios = useAxios();
 
-    const login = async (email, password) => {
+    const login = async (userDetails) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('http://localhost:5000/login', {
-            method: "POST",
-            headers: { 
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify({email, password})
-        });
-        // console.log(response);
+        const response = await axios.post('/login', userDetails);
 
-        const json = await response.json();
-        // console.log(json);
+        const json = await response.data;
 
-        if(!response.ok){
+        if(response.status !== 200){
             setIsLoading(false);
             setError(json.error);
             toast.error(json.error);
@@ -43,7 +37,7 @@ export const useLogin = () => {
         // Update this AuthContext
         dispatchFromAuth({type: 'LOGIN', payload: json});
         setIsLoading(false);
-        getAllUsersData();
+        // getAllUsersData();
         toast.success(json.success);
         navigate('/home');
 

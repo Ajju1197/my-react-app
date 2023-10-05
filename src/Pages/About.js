@@ -36,7 +36,7 @@ const About = () => {
                                 </div>
                                 <div className="about_right_block">
                                     <label htmlFor="">Name:</label>
-                                    <label htmlFor="">{data.name}</label>
+                                    <label htmlFor="">{data.name} 😁</label>
                                 </div>
                             </div>
                         )) :

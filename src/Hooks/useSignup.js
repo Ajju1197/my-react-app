@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { useAxios } from "../Contexts/useAxios";
 
 const { useState } = require("react");
 const { useAuthContext } = require("./useAuthContext");
@@ -10,12 +10,13 @@ export const useSignup = () => {
     const [isLoggedIn, setIsLoading] = useState(null);
     const { dispatchFromAuth } = useAuthContext();
     const navigate = useNavigate();
+    const axios = useAxios();
 
     const signup = async (user) => {
         setIsLoading(true);
         setError(null);
 
-        axios.post('http://localhost:5000/signup', user)
+        await axios.post('/signup', user)
         .then(res => {
             const json = res.data;
             console.log(res);

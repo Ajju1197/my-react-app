@@ -2,15 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 import { toast } from "react-toastify";
 import { useAxios } from "../Contexts/useAxios";
-import axios from "axios";
 import { useGetUserData } from "./useGetUsersData";
 
 export const useLogout = () => {
     const {dispatchFromAuth, user} = useAuthContext();
     const navigate = useNavigate();
     const {getAllUsersData} = useGetUserData();
+    const axios = useAxios();
     
-    // const axios = useAxios();
     const logout = async () => {
         await axios.put('/logout', {
             isActive: false,

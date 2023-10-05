@@ -16,7 +16,7 @@ function Login({onLogin}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(userDetails.email, userDetails.password);
+        login(userDetails);
     }
 
     const handleUserDetails = (e) => {

@@ -13,7 +13,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.get('/getAllBlogs');
-            if(response.statusText !== 'OK'){
+            if(response.status !== 200){
                 setLoading(false);
                 toast.error(response.data);
                 return; 
@@ -32,7 +32,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.get(`/getSingleBlog/${id}`);
-            if(response.statusText !== 'OK'){
+            if(response.status !== 200){
                 setLoading(false);
                 toast.error(response.data);
                 return; 
@@ -50,7 +50,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.post(`/postBlog`, data);
-            if(response.statusText !== 'OK' || data.length == 0){
+            if(response.status !== 200 || data.length == 0){
                 setLoading(false);
                 toast.error(response.data);
                 return; 
@@ -68,7 +68,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.put(`/updateBlog/${id}`, data);
-            if(response.statusText !== 'OK' || response.data.length == 0){
+            if(response.status !== 200 || response.data.length == 0){
                 setLoading(false);
                 toast.error(response.data);
                 return; 
@@ -86,7 +86,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.put(`/likeBlog/${id}`);
-            if(response.statusText !== 'OK' || response.data.length == 0){
+            if(response.status !== 200 || response.data.length == 0){
                 setLoading(false);
                 toast.error(response.data);
                 return; 
@@ -102,7 +102,7 @@ export const useGetBlogData = () => {
         setLoading(true);
         try {
             const response = await newAxiosInstance.put(`/disLikeBlog/${id}`);
-            if(response.statusText !== 'OK' || response.data.length == 0){
+            if(response.status !== 200 || response.data.length == 0){
                 setLoading(false);
                 toast.error(response.data);
                 return; 

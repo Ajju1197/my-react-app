@@ -4,6 +4,7 @@ import { useGetUserContext } from "./useGetUserContext";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAxios } from "../Contexts/useAxios";
 
 
 export const useGetUserData = () => {
@@ -12,27 +13,18 @@ export const useGetUserData = () => {
     const { user, dispatchFromAuth } = useAuthContext();
     const { dispatch } = useGetUserContext();
     const navigate = useNavigate();
-
-    const url = 'http://localhost:5000';
+    const axios = useAxios();
 
     const getAllUsersData = async (query) => {
-        if (!user) {
-            return;
-        }
         console.log(user.token);
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`${url}/getAllSignupUserData/?q=${query}`, {
-                'method': 'GET',
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            const data = await response.json();
+            const response = await axios.get(`/getAllSignupUserData/?q=${query}`);
+            const data = response.data;
 
-            if (!response.ok && !data) {
+            if (response.status !== 200 || data.length == 0) {
                 toast.error(data.error);
                 setError(data.error);
                 return;
@@ -51,15 +43,15 @@ export const useGetUserData = () => {
         }
         setLoading(true);
         setError(null);
-        const response = await fetch(`${url}/getSingleSignupUserData/${id}`, {
+        const response = await axios.get(`/getSingleSignupUserData/${id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${user.token}`
             }
         });
 
-        const data = await response.json();
-        if (response.ok && data) {
+        const data = response.data;
+        if (response.status == 200) {
             setLoading(false);
             console.log(data);
             dispatch({ type: 'GET_SINGLE_USER_DATA', payload: { user: data, isLoading: isLoading } });
@@ -79,13 +71,8 @@ export const useGetUserData = () => {
         try {
             // Make a PUT request using Axios
             const response = await axios.put(
-                `${url}/updateSingleSignupUserData/${id}`,
-                updatedUserData, // Send the updated user data as the request body
-                {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
+                `/updateSingleSignupUserData/${id}`,
+                updatedUserData
             );
 
             // Check the response status code, Axios handles it automatically
@@ -119,29 +106,20 @@ export const useGetUserData = () => {
         setLoading(true);
         setError(null);
 
-        try {
-            const response = await fetch(`${url}/deleteSingleSignupUserData/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                }
-            });
-            const data = await response.json();
-            if (!response.ok) {
-                setError(data.error);
-                toast.error(data.error);
-                setLoading(false);
-                return;
-            }
+        const response = await axios.delete(`/deleteSingleSignupUserData/${id}`);
+        const data = response.data;
+        if (response.status !== 200) {
+            setError(data.error);
+            toast.error(data.error);
             setLoading(false);
-            localStorage.removeItem('user');
-            dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
-            dispatchFromAuth({type: 'LOGOUT'});
-            toast.success('Your logged out successfull.')
-            navigate('/');
-        } catch (error) {
-            setError("An error occurred while deleting the user.");
+            return;
         }
+        setLoading(false);
+        localStorage.removeItem('user');
+        dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
+        dispatchFromAuth({type: 'LOGOUT'});
+        toast.success('Your logged out successfull.')
+        navigate('/');
     };
 
 
@@ -151,14 +129,10 @@ export const useGetUserData = () => {
         }
         setLoading(true);
         setError(null);
-        const response = await fetch(`${url}/aboutUserDetails`, {
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        });
+        const response = await axios.get(`/aboutUserDetails`);
 
-        const data = await response.json();
-        if (response.ok && data) {
+        const data = response.data;
+        if (response.status == 200) {
             setLoading(false);
             console.log(data);
             dispatch({ type: 'GET_ABOUT_USER_DATA', payload: { users: data } });
