@@ -7,8 +7,8 @@ import appLogo from '../images/logo192.png';
 
 const About = () => {
 
-    const {users} = useGetUserContext();
-    const {isError, isLoading, getAboutUsersData} = useGetUserData();
+    const { users } = useGetUserContext();
+    const { isError, isLoading, getAboutUsersData } = useGetUserData();
 
     useEffect(() => {
         getAboutUsersData();
@@ -18,8 +18,8 @@ const About = () => {
         <div className="aboutPageClass">
             {
                 isLoading ? <LoadingSpinner /> :
-                users.length ?
-                users.map(data => (
+                    users.length ?
+                        users.map(data => (
                             <div className="about_card_block" key={data._id}>
                                 <div className="aboutBgImg">
                                     {/* <img src={aboutProfile} alt={data.name} loading="lazy"/> */}
@@ -36,7 +36,7 @@ const About = () => {
                                 </div>
                                 <div className="about_right_block">
                                     <label htmlFor="">Name:</label>
-                                    <label htmlFor="">{data.name} 😁</label>
+                                    <label htmlFor="">{data.name} 👱‍♂️</label>
                                 </div>
                             </div>
                         )) :
