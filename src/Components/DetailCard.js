@@ -8,7 +8,7 @@ import '../Pages/PagesStyles.css';
 import '../Components/Logins/LoginSignUp.css'
 
 function DetailCard({signUpUserDetails}) {
-    const { isAuthorized, selectedImage, inputRef, formData, handleSubmit, handleInputChange, handleImageChange, handleImageClick } = signUpUserDetails;
+    const { isAuthorized, selectedImage, inputRef, formData, handleSubmit, handleInputChange, handleImageChange, handleImageClick, isLoading } = signUpUserDetails;
     const { user } = useAuthContext();
     const navigate = useNavigate();
     return (
@@ -110,7 +110,13 @@ function DetailCard({signUpUserDetails}) {
                     {
                         isAuthorized ?
                         <div className='btnLoginBtn'>
-                            <span className="mernArrowIconClass"></span>
+                            {
+                                isLoading ? 
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div> : 
+                                <span className="mernArrowIconClass"></span>
+                            }
                             <input
                                 type="submit"
                                 name="register"

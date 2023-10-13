@@ -7,7 +7,7 @@ const { useAuthContext } = require("./useAuthContext");
 
 export const useSignup = () => {
     const [isError, setError] = useState(null);
-    const [isLoggedIn, setIsLoading] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
     const { dispatchFromAuth } = useAuthContext();
     const navigate = useNavigate();
     const axios = useAxios();
@@ -30,9 +30,10 @@ export const useSignup = () => {
                 navigate('/');
         } catch (error) {
             toast.error(error.response.data.error);
+            setIsLoading(false);
         }
 
     }
 
-    return { signup, isError, isLoggedIn };
+    return { signup, isError, isLoading };
 }

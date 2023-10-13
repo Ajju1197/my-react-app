@@ -11,6 +11,7 @@ export const useLogout = () => {
     const axios = useAxios();
     
     const logout = async () => {
+        
         await axios.put('/logout', {
             isActive: false,
             userId:user.user._id,

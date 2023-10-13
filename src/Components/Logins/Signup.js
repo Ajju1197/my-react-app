@@ -8,7 +8,7 @@ import '../../Pages/PagesStyles.css'
 function Signup() {
 
     const inputRef = useRef();
-    const { signup, isError } = useSignup();
+    const { signup, isError, isLoading } = useSignup();
     const [selectedImage, setSelectedImage] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(true);
 
@@ -62,6 +62,7 @@ function Signup() {
         handleImageClick,
         inputRef,
         isError,
+        isLoading,
         handleSubmit,
         handleInputChange,
         handleImageChange,

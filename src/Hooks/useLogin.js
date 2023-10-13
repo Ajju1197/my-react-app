@@ -8,7 +8,7 @@ const { useAuthContext } = require("./useAuthContext");
 
 export const useLogin = () => {
     const [isError, setError] = useState(null);
-    const [isLoggedIn, setIsLoading] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
     const {dispatchFromAuth} = useAuthContext();
     const {getAllUsersData} = useGetUserData();
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ export const useLogin = () => {
                 setIsLoading(false);
                 setError(response.error);
                 toast.error(response.error);
+                dispatchFromAuth({type: 'LOGIN', payload: {isLoading: isLoading}});
                 return;
             }
             
@@ -35,17 +36,18 @@ export const useLogin = () => {
             console.log(json + 'this is from Login hook');
     
             // Update this AuthContext
-            dispatchFromAuth({type: 'LOGIN', payload: json});
+            dispatchFromAuth({type: 'LOGIN', payload: {data: json, isLoading: isLoading}});
             setIsLoading(false);
             // getAllUsersData();
             toast.success(json.success);
             navigate('/home');
         } catch (error) {
             toast.error(error.response.data.error);
+            setIsLoading(false);
         }
 
 
     }
 
-    return {login, isError, isLoggedIn};
+    return {login, isError, isLoading};
 }

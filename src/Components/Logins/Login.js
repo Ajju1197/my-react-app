@@ -4,11 +4,12 @@ import formImg from '../../images/hero-img.png';
 import { toast } from 'react-hot-toast';
 import { useLogin } from '../../Hooks/useLogin';
 import './LoginSignUp.css'
+import { useAuthContext } from '../../Hooks/useAuthContext';
 
 function Login({onLogin}) {
 
     const navigate = useNavigate();
-    const {login, isError} = useLogin();
+    const {login, isError, isLoading} = useLogin();
 
     const [userDetails, setUserDetails] = useState({
         email: "", password: ""
@@ -46,8 +47,15 @@ function Login({onLogin}) {
                             </div>
                         </div>
                         <div className='btnLoginBtn px-3 py-2'>
-                            <span className="mernArrowIconClass"></span>
-                            <input type='submit' className='aboutLoginBtn' />
+                            {
+                                isLoading ? 
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div> : 
+                                <span className="mernArrowIconClass"></span>
+                            }
+                            
+                            <input type='submit' disabled={isLoading} value='Submit' className='aboutLoginBtn' />
                         </div>
                         <div className='alreadyRegisteredUser'>
                             <Link to="/register" className='signUpNavigateClass'>Register</Link>
