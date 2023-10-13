@@ -21,9 +21,9 @@ const Home = () => {
                 </div>
                 <div className="aboutMeBtn">
                     <div className="btns">
-                        {user ? <a onClick={()=>navigate('/about')} className='aboutLoginBtn ps-3'><AiOutlineDoubleRight className="rightArrowIcon"/> ABOUT ME</a> : <a onClick={()=>navigate('/')} className='aboutLoginBtn'>Signin</a>}
+                        {user ? <a onClick={()=>navigate('/about')} className='btnLoginBtn ps-3'><span className="mernArrowIconClass"></span> ABOUT ME</a> : <a onClick={()=>navigate('/')} className='btnLoginBtn'>Signin</a>}
                         {user ? null : <span className="orClass">Or</span>}
-                        {user ? <a download href="#" className='aboutLoginBtn'>Download CV</a> : <Link to="/register" className='aboutLoginBtn'>Signup</Link>}
+                        {user ? <a download href="#" className='btnLoginBtn'>Download CV</a> : <Link to="/register" className='btnLoginBtn'>Signup</Link>}
                     </div>
                 </div>
             </div>

@@ -2,11 +2,11 @@
     display: grid;
     width: 50%;
     margin: auto;
-    grid-template-columns: 30% 1fr;
+    grid-template-columns: 1fr;
     padding: 20px;
     gap: 10px;
     align-items: center;
-    background-color: #ffffff4d;
+    background-color: rgba(0,0,0, 0.5);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .signUpFromMainDiv{
@@ -58,45 +58,4 @@
     100%{
         transform: translateY(0px);
     }
-}
-.form-group{
-    position: relative;
-}
-.form-group label{
-    position: absolute;
-    pointer-events: none;
-    left: 10px;
-    top: 7px;
-    transition: 0.3s ease all;
-    font-size: 12px;
-    color: #061a2c;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 30ch;
-}
-.form-group input:focus ~ label,
-.form-group input:not(:placeholder-shown) ~ label{
-    top:-9px;
-    font-size:12px;
-    background-color: white;
-    color: #061a2c;
-    font-weight: 400;
-    padding-inline: 2px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 20ch;
-}
-
-.form-group input:focus{
-    border: 1px solid #061a2c;
-    outline: none;
-    box-shadow: none;
-}
-.textClass{
-    color: #00375E;
-}
-.errorMsg{
-    border-radius: 8px;
 }

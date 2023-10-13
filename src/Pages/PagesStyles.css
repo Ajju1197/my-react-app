@@ -1,20 +1,4 @@
 /* Home Page Styling */
-.registerForm{
-    isolation: isolate;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-}
-.signUpUserDetailsFieldsClass{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-}
-.registerFormBlock{
-    width: 80%;
-}
 .homePageClass,.aboutPageClass,.product,.userProfilePageClass,.allBlogsPageClass,.blogDetailsPageClass{
     height: 100%;
     overflow: auto;
@@ -104,49 +88,6 @@
     padding: 10px;
     transition: all 0.5s ease-in;
 }
-
-.aboutLoginBtn:hover {
-    transition: all 0.5s ease-in;
-    background-color: var(--primary);
-}
-
-.aboutLoginBtn::after {
-    content: '';
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    height: 3px;
-    width: 100%;
-    background-color: aqua;
-}
-
-.aboutLoginBtn {
-    color: aqua !important;
-    letter-spacing: 6px;
-    padding: 10px;
-    display: flex;
-    position: relative;
-    border: 1px solid rgba(0, 255, 255, 0.34);
-    align-items: center;
-    gap: 10px;
-}
-
-.rightArrowIcon {
-    color: aqua;
-    font-size: 20px;
-    animation: moveToRightAndLeft 1s infinite alternate-reverse both;
-}
-
-@keyframes moveToRightAndLeft {
-    0% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(5px);
-    }
-}
-
 /* AboutPage Styling */
 .about_card_block{
     display: flex;
@@ -486,35 +427,6 @@
     background-size: cover;
     filter: blur(4px);
 } */
-
-.userProfile{
-    position: relative;
-}
-.userImage{
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    border: 7px solid var(--lime);
-    overflow: hidden;
-    transition: all 0.4s ease;
-    position: relative;
-}
-.userImage > img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.editIcon{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 99;
-    width: 30px;
-    cursor: pointer;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #000;
-}
 .imageUpload{
     position: inherit;
     bottom: 9px;

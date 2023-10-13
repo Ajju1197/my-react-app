@@ -3,6 +3,9 @@ import syedProfile from '../images/SyedAjmath.jpg';
 import editIcon from '../images/editIcon.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../Hooks/useAuthContext';
+import '../App.css';
+import '../Pages/PagesStyles.css';
+import '../Components/Logins/LoginSignUp.css'
 
 function DetailCard({signUpUserDetails}) {
     const { isAuthorized, selectedImage, inputRef, formData, handleSubmit, handleInputChange, handleImageChange, handleImageClick } = signUpUserDetails;
@@ -25,17 +28,17 @@ function DetailCard({signUpUserDetails}) {
                         ) : (
                             <img src={syedProfile} alt={formData.name} />
                         )}
+                        <div className='editIcon'>
+                            <label htmlFor="imageUpload">
+                                <img src={editIcon} alt="editIcon" />
+                            </label>
+                            <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
+                        </div>
 
-                    </div>
-                    <div className='editIcon'>
-                        <label htmlFor="imageUpload">
-                            <img src={editIcon} alt="editIcon" />
-                        </label>
-                        <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
                     </div>
                 </div>
                 <div className='signUpUserDetailsFieldsClass'>
-                    <div className="mernInputStyleClass mt-3">
+                    <div className="mernInputStyleClass ">
                         <input
                             type="text"
                             value={formData.name}
@@ -46,8 +49,9 @@ function DetailCard({signUpUserDetails}) {
                             id="name"
                             autoComplete="off"
                         />
+                        <label>Name</label>
                     </div>
-                    <div className="mernInputStyleClass mt-3">
+                    <div className="mernInputStyleClass ">
                         <input
                             type="email"
                             value={formData.email}
@@ -59,8 +63,9 @@ function DetailCard({signUpUserDetails}) {
                             disabled={user?.user?.email}
                             autoComplete="off"
                         />
+                        <label>Email</label>
                     </div>
-                    <div className="mernInputStyleClass mt-3">
+                    <div className="mernInputStyleClass ">
                         <input
                             type="text"
                             value={formData.phone}
@@ -71,8 +76,9 @@ function DetailCard({signUpUserDetails}) {
                             id="phone"
                             autoComplete="off"
                         />
+                        <label>Phone</label>
                     </div>
-                    <div className="mernInputStyleClass mt-3">
+                    <div className="mernInputStyleClass ">
                         <input
                             type="text"
                             value={formData.work}
@@ -83,34 +89,38 @@ function DetailCard({signUpUserDetails}) {
                             id="work"
                             autoComplete="off"
                         />
+                        <label>Work</label>
                     </div>
                 </div>
                 {
                     !user ? (
-                        <div>
-                            <div className='mernInputStyleClass mt-3'>
+                        <div className='signUpUserDetailsFieldsClass'>
+                        <div className='mernInputStyleClass '>
                                 <input type='password' value={formData.password} onChange={handleInputChange} placeholder=' ' className='form-control' name="password" id="password" autoComplete='off' />
                                 <label>Password</label>
                             </div>
-                            <div className='mernInputStyleClass mt-3'>
+                            <div className='mernInputStyleClass '>
                                 <input type='password' value={formData.cpassword} onChange={handleInputChange} placeholder=' ' className='form-control' name="cpassword" id="cpassword" autoComplete='off' />
                                 <label>Confirm Password</label>
                             </div>
                         </div>
                     ) : null
                 }
-                <div className="mt-3 d-flex justify-content-center align-content-center">
+                <div className=" d-flex justify-content-center align-content-center gap-x-3">
                     {
                         isAuthorized ?
+                        <div className='btnLoginBtn'>
+                            <span className="mernArrowIconClass"></span>
                             <input
                                 type="submit"
                                 name="register"
                                 id="register"
-                                className="bg-black text-white me-2 px-3 py-2 rounded-sm"
+                                className="aboutLoginBtn"
                                 value={user ? 'Update' : 'Register'}
-                            /> : null
+                            />
+                        </div> : null
                     }
-                    {user ? <button type='button' className='bg-black text-white px-3 py-2 rounded-sm' onClick={() => navigate(-1)}>Go Back</button> : null}
+                    {user ? <button type='button' className='btnLoginBtn' onClick={() => navigate(-1)}>Go Back</button> : null}
                 </div>
             </form>
         </div>

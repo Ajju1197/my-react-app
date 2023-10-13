@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import './LoginSignUp.css'
 import { useSignup } from '../../Hooks/useSignup';
 import DetailCard from '../DetailCard';
+import './LoginSignUp.css'
+import '../../Pages/PagesStyles.css'
 
 function Signup() {
 
@@ -71,16 +72,11 @@ function Signup() {
             <div className='signUpFormBlock card'>
                 <div className='registerForm'>
                     <div>
-                        <h4 className='textClass'>Registration Form</h4>
+                        <h4 className='authHeadingClass'>Registration Form</h4>
                     </div>
                     <DetailCard  signUpUserDetails={signUpUserDetails}/>
-                </div>
-                <div className=''>
-                    {/* <div className='formImg'>
-                        <img src={formImg} alt="form-image" loading='lazy' />
-                    </div> */}
                     <div className='alreadyRegisteredUser'>
-                        <Link to="/" className='textClass'>I am already registered</Link>
+                        <Link to="/" className='signUpNavigateClass'>I am already registered</Link>
                     </div>
                 </div>
             </div>

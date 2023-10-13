@@ -29,32 +29,35 @@ function Login({onLogin}) {
 
     return (
         <div className="signUpFromMainDiv">
-            <div className='signUpFormBlock card'>
-                <div className='registerForm'>
+            <div className='signUpFormBlock d-flex flex-row gap-4 justify-center card'>
+                <div className='registerForm p-5'>
                     <div>
-                        <h4 className='textClass'>Signin Form</h4>
+                        <h4 className='authHeadingClass'>Login  Form</h4>
                     </div>
                     <form onSubmit={handleSubmit} name="register-form" id="register-form" className='registerForm'>
-                        <div className='form-group mt-3'>
-                            <input type='email' value={userDetails.email} onChange={handleUserDetails} placeholder=' ' className='form-control' name="email" id="email" />
-                            <label>Email</label>
+                        <div className="d-flex flex-col gap-y-3">
+                            <div className='mernInputStyleClass'>
+                                <input type='email' value={userDetails.email} onChange={handleUserDetails} placeholder=' ' className='form-control' name="email" id="email" />
+                                <label>Email</label>
+                            </div>
+                            <div className='mernInputStyleClass'>
+                                <input type='password' value={userDetails.password} onChange={handleUserDetails} placeholder=' ' className='form-control' name="password" id="password" />
+                                <label>Password</label>
+                            </div>
                         </div>
-                        <div className='form-group mt-3'>
-                            <input type='password' value={userDetails.password} onChange={handleUserDetails} placeholder=' ' className='form-control' name="password" id="password" />
-                            <label>Password</label>
+                        <div className='btnLoginBtn px-3 py-2'>
+                            <span className="mernArrowIconClass"></span>
+                            <input type='submit' className='aboutLoginBtn' />
                         </div>
-                        <div className='mt-3'>
-                            <input type='submit' className='bg-black px-4 py-2 rounded-md' />
+                        <div className='alreadyRegisteredUser'>
+                            <Link to="/register" className='signUpNavigateClass'>Register</Link>
                         </div>
-                        {isError && <div className='bg-danger text-white p-2 mt-2 errorMsg'>{isError}</div>}
+                            {isError && <div className='bg-danger text-white p-2 mt-2 errorMsg'>{isError}</div>}
                     </form>
                 </div>
                 <div className=''>
                     <div className='formImg'>
                         <img src={formImg} alt="form-image" loading='lazy' />
-                    </div>
-                    <div className='alreadyRegisteredUser'>
-                        <Link to="/register" className='textClass'>Signup</Link>
                     </div>
                 </div>
             </div>

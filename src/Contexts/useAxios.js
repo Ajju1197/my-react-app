@@ -6,7 +6,7 @@ export const useAxios = () => {
 
         const newAxiosInstance = axios.create({
             baseURL: 'https://mern-server-k0zl.onrender.com/api',
-            timeout: 8000,
+            // timeout: 8000,
             headers: user ? {'Authorization': `Bearer ${user.token}`} : {"Content-type": "application/json"}
         });
     
