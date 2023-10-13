@@ -15,32 +15,22 @@ export const useSignup = () => {
     const signup = async (user) => {
         setIsLoading(true);
         setError(null);
-
-        await axios.post('/signup', user)
-        .then(res => {
-            const json = res.data;
-            console.log(res);
-            console.log('This is signup response' + JSON.stringify(json));
-    
-    
-            if (res.statusText != 'OK') {
+        try {
+            // const response = await axios.post('/signup', user);
+            const response = await axios.post('https://mern-server-k0zl.onrender.com/api/signup', user);
+                console.log(response);
+                if (response.status !== 200) {
+                    setIsLoading(false);
+                    setError(response.error);
+                    toast.error(response.error);
+                    return;
+                }
                 setIsLoading(false);
-                setError(res.error);
-                toast.error(json.error);
-                return;
-            }
-    
-            // Update this AuthContext
-            // dispatch({ type: 'LOGIN', payload: json.user });
-            setIsLoading(false);
-            toast.success(json.success);
-            navigate('/');
-        })
-        .catch(err => {
-            toast.error(err);
-        });
-
-        // const json = await response.json();
+                // toast.success(json.success);
+                navigate('/');
+        } catch (error) {
+            toast.error(error.response.data.error);
+        }
 
     }
 

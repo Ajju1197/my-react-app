@@ -18,28 +18,32 @@ export const useLogin = () => {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios.post('/login', userDetails);
-
-        const json = await response.data;
-
-        if(response.status !== 200){
+        try {
+            const response = await axios.post('/login', userDetails);
+    
+            if(response.status !== 200){
+                setIsLoading(false);
+                setError(response.error);
+                toast.error(response.error);
+                return;
+            }
+            
+            const json = response.data;
+            // save the user to local storage.
+            localStorage.setItem('user', JSON.stringify(json));
+    
+            console.log(json + 'this is from Login hook');
+    
+            // Update this AuthContext
+            dispatchFromAuth({type: 'LOGIN', payload: json});
             setIsLoading(false);
-            setError(json.error);
-            toast.error(json.error);
-            return;
+            // getAllUsersData();
+            toast.success(json.success);
+            navigate('/home');
+        } catch (error) {
+            toast.error(error.response.data.error);
         }
 
-        // save the user to local storage.
-        localStorage.setItem('user', JSON.stringify(json));
-
-        console.log(json + 'this is from Login hook');
-
-        // Update this AuthContext
-        dispatchFromAuth({type: 'LOGIN', payload: json});
-        setIsLoading(false);
-        // getAllUsersData();
-        toast.success(json.success);
-        navigate('/home');
 
     }
 
