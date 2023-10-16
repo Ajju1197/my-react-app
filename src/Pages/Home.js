@@ -4,9 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { useTypewriter } from 'react-simple-typewriter';
 import { useAuthContext } from "../Hooks/useAuthContext";
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-    const {user} = useAuthContext();
+    // const {user} = useAuthContext();
+    const currUser = useSelector(state => state.login);
+    const {user} = currUser.user;
+    
     const [technologies] = useTypewriter({
         words: ['MERN','MONGO DB','EXPRESS JS','REACT','Angular', 'NODE JS'],
         loop: 0

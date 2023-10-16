@@ -4,7 +4,10 @@ import { useGetUserData } from '../Hooks/useGetUsersData';
 function Form({handleOnChange}) {
 
     return (
-        <input type="text" className='form-control' onChange={handleOnChange} />
+        <>
+            <input type="text" placeholder=' ' className='form-control' onChange={handleOnChange} />
+            <label>Search User</label>
+        </>
     )
 }
 

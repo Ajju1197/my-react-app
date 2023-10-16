@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import formImg from '../../images/hero-img.png';
 import { toast } from 'react-hot-toast';
 import { useLogin } from '../../Hooks/useLogin';
 import './LoginSignUp.css'
 import { useAuthContext } from '../../Hooks/useAuthContext';
+import { useSelector } from 'react-redux';
 
 function Login({onLogin}) {
 
-    const navigate = useNavigate();
-    const {login, isError, isLoading} = useLogin();
+    const {login} = useLogin();
+    const userData = useSelector(state => state.login);
+    const {isLoading, isError} = userData;
 
     const [userDetails, setUserDetails] = useState({
         email: "", password: ""
@@ -49,8 +51,8 @@ function Login({onLogin}) {
                         <div className='btnLoginBtn px-3 py-2'>
                             {
                                 isLoading ? 
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
+                                <div className="spinner-border" role="status">
+                                    <span className="sr-only">Loading...</span>
                                 </div> : 
                                 <span className="mernArrowIconClass"></span>
                             }
@@ -60,7 +62,7 @@ function Login({onLogin}) {
                         <div className='alreadyRegisteredUser'>
                             <Link to="/register" className='signUpNavigateClass'>Register</Link>
                         </div>
-                            {isError && <div className='bg-danger text-white p-2 mt-2 errorMsg'>{isError}</div>}
+                            {/* {isError && <div className='bg-danger text-white p-2 mt-2 errorMsg'>{isError}</div>} */}
                     </form>
                 </div>
                 <div className=''>

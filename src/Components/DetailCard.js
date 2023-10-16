@@ -6,10 +6,13 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import '../App.css';
 import '../Pages/PagesStyles.css';
 import '../Components/Logins/LoginSignUp.css'
+import { useSelector } from 'react-redux';
 
 function DetailCard({signUpUserDetails}) {
     const { isAuthorized, selectedImage, inputRef, formData, handleSubmit, handleInputChange, handleImageChange, handleImageClick, isLoading } = signUpUserDetails;
-    const { user } = useAuthContext();
+    // const { user } = useAuthContext();
+    const currUser = useSelector(state => state.login);
+    const {user} = currUser.user;
     const navigate = useNavigate();
     return (
         <div className="registerFormBlock">
@@ -112,8 +115,8 @@ function DetailCard({signUpUserDetails}) {
                         <div className='btnLoginBtn'>
                             {
                                 isLoading ? 
-                                <div class="spinner-border" role="status">
-                                    <span class="sr-only">Loading...</span>
+                                <div className="spinner-border" role="status">
+                                    <span className="sr-only">Loading...</span>
                                 </div> : 
                                 <span className="mernArrowIconClass"></span>
                             }

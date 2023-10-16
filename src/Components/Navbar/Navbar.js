@@ -8,11 +8,19 @@ import { useAuthContext } from '../../Hooks/useAuthContext';
 import Logout from '../../images/Logout.svg';
 import Form from '../Form';
 import searchIcon from '../../images/search.svg';
+import { useSelector } from 'react-redux';
+import { useGetUserData } from '../../Hooks/useGetUsersData';
+
 const Navbar = () => {
+    // const {user} = useAuthContext();
     const [styleToNavBar, setStyleToNavbar] = useState({});
     const location = useLocation();
     const {logout} = useLogout();
-    const {user} = useAuthContext();
+    const { getAllUsersData } = useGetUserData();
+    const [query, setQuery] = useState("");
+
+    const currUser = useSelector(state => state.login);
+    const {user} = currUser.user;
 
     const logoStyle = {
         display: 'flex',
@@ -51,7 +59,12 @@ const Navbar = () => {
 
     useEffect(() => {
         setScrollFunction();
-    },[user]);
+        if(query.length === 0 || query.length >= 2) getAllUsersData(query);
+    },[user, query]);
+
+    const handleOnChange = (e) => {
+        setQuery(e.target.value);
+    }
 
     return (
         <>
@@ -63,11 +76,11 @@ const Navbar = () => {
                 <div className={`${location.pathname === '/home' ? 'homeProfileClass' : 'profileClass'} d-flex align-items-center`}>
                     {
                         pathNames.includes(location.pathname) ? (
-                            <div className='searchInputClass'>
-                                <div className='searchImg'>
+                            <div className='mernInputStyleClass searchInputClass'>
+                                {/* <div className='searchImg'>
                                     <img src={searchIcon} alt="search"/>
-                                </div>
-                                <Form/>
+                                </div> */}
+                                <Form handleOnChange={handleOnChange}/>
                             </div>
                         ) : null
                     }
@@ -77,14 +90,14 @@ const Navbar = () => {
                                 {!user ? 
                                 <LoadingSpinner/> : 
                                 <div className='profileIconWithEmail'>
-                                    <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>{user.user.email}</label>
+                                    <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>{user.email}</label>
                                     <div className='ProfileUser'>
-                                        <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + user.user.profileImage} alt={user.user.name} loading='lazy'/>
+                                        <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + user.profileImage} alt={user.name} loading='lazy'/>
                                     </div>
                                 </div>}
                                 <div className='dropDown'>
                                     <ul className='dropDownList'>
-                                        <li><NavLink to={`userDetails/${user.user._id}`}><FaUserTie/>User Profile</NavLink></li>
+                                        <li><NavLink to={`userDetails/${user._id}`}><FaUserTie/>User Profile</NavLink></li>
                                         <li onClick={handleLogoutClick}><img alt="Logout" src={Logout}/> Signout</li>
                                     </ul>
                                 </div>

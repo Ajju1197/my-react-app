@@ -6,16 +6,22 @@ import '../Components/Logins/LoginSignUp.css';
 import DetailCard from '../Components/DetailCard';
 import LoadingSpinner from '../Components/LoadingSpinner';
 import { useAuthContext } from '../Hooks/useAuthContext';
+import { useSelector } from 'react-redux';
 
 function SignUpUserDetail() {
     const params = useParams();
-    const { singleUser } = useGetUserContext();
+    // const { singleUser } = useGetUserContext();
+    // const { user } = useAuthContext();
     const { isError, isLoading, getUserData, userHandleUpdateClick } = useGetUserData();
     const [selectedImage, setSelectedImage] = useState(null);
     const inputRef = useRef();
     const [isAuthorized, setIsAuthorized] = useState(false);
-    const { user } = useAuthContext();
+
+    const {singleUser} = useSelector(state => state.users);
+    const currUser = useSelector(state => state.login);
+    const {user} = currUser.user;
     // Initialize formData with default values matching your data structure
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -39,7 +45,7 @@ function SignUpUserDetail() {
             work: singleUser.work,
             profileImage: singleUser.profileImage,
         });
-        if(user.user._id === params.id){
+        if(user._id === params.id){
             setIsAuthorized(true);
         }
     },[singleUser]);

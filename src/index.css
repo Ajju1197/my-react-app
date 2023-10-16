@@ -18,6 +18,7 @@ body {
   --dark:#000000;
   --lime:rgb(61, 245, 61);
   --red: rgba(248, 12, 12, 0.949);
+  --aqua:aqua;
 }
 
 code {
@@ -209,7 +210,7 @@ a{
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  border: 7px solid var(--lime);
+  border: 3px solid var(--aqua);
   overflow: hidden;
   transition: all 0.4s ease;
   position: relative;

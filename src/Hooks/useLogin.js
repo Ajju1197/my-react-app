@@ -2,52 +2,48 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetUserData } from "./useGetUsersData";
 import { useAxios } from "../Contexts/useAxios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginFail, loginSuccess, loginStart } from "../Redux/slices/authSlice";
 
 const { useState } = require("react");
 const { useAuthContext } = require("./useAuthContext");
 
 export const useLogin = () => {
-    const [isError, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
-    const {dispatchFromAuth} = useAuthContext();
+    // const {dispatchFromAuth} = useAuthContext();
     const {getAllUsersData} = useGetUserData();
     const navigate = useNavigate();
     const axios = useAxios();
 
+    const dispatch = useDispatch();
+
     const login = async (userDetails) => {
-        setIsLoading(true);
-        setError(null);
+        dispatch(loginStart());
 
         try {
             const response = await axios.post('/login', userDetails);
     
             if(response.status !== 200){
-                setIsLoading(false);
-                setError(response.error);
                 toast.error(response.error);
-                dispatchFromAuth({type: 'LOGIN', payload: {isLoading: isLoading}});
+                dispatch(loginFail(response.error));
                 return;
             }
             
             const json = response.data;
+
             // save the user to local storage.
             localStorage.setItem('user', JSON.stringify(json));
-    
-            console.log(json + 'this is from Login hook');
+
+            dispatch(loginSuccess({data: json}));
     
             // Update this AuthContext
-            dispatchFromAuth({type: 'LOGIN', payload: {data: json, isLoading: isLoading}});
-            setIsLoading(false);
-            // getAllUsersData();
+            // dispatchFromAuth({type: 'LOGIN', payload: {data: json}});
             toast.success(json.success);
             navigate('/home');
         } catch (error) {
             toast.error(error.response.data.error);
-            setIsLoading(false);
+            dispatch(loginFail(error.response.data.error));
         }
-
-
     }
 
-    return {login, isError, isLoading};
+    return {login};
 }

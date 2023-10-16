@@ -1,39 +1,55 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { useGetUserContext } from "./useGetUserContext";
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAxios } from "../Contexts/useAxios";
+import { useDispatch, useSelector } from "react-redux";
+import { 
+    getAllUsersStart, 
+    getAllUsersSuccess, 
+    getAllUsersFailure,
+    getSingleUserStart,
+    getSingleUserSuccess,
+    getSingleUserFailure,
+    getUpdateUserStart,
+    getUpdateUserSuccess,
+    getUpdateUserFailure,
+    deleteUserStart,
+    deleteUserSuccess,
+    deleteUserFailure,
+} from "../Redux/slices/getAllUsersSlice";
+import {loginUserUpdateSuccess, logoutSuccess} from '../Redux/slices/authSlice';
 
 
 export const useGetUserData = () => {
     const [isError, setError] = useState(null);
     const [isLoading, setLoading] = useState(null);
-    const { user, dispatchFromAuth } = useAuthContext();
-    const { dispatch } = useGetUserContext();
+    const { dispatchFromAuth } = useAuthContext();
     const navigate = useNavigate();
     const axios = useAxios();
+    const { dispatch } = useGetUserContext();
+
+    const currUser = useSelector(state => state.login);
+    const {user, token} = currUser.user;
+    const userDispatch = useDispatch();
 
     const getAllUsersData = async (query) => {
-        console.log(user.token);
-        setLoading(true);
-        setError(null);
+    
+        userDispatch(getAllUsersStart());
 
         try {
             const response = await axios.get(`/getAllSignupUserData/?q=${query}`);
             const data = response.data;
-
             if (response.status !== 200 || data.length == 0) {
                 toast.error(data.error);
-                setError(data.error);
+                userDispatch(getAllUsersFailure(data.error));
                 return;
             }
-            setLoading(false);
-            console.log(data);
-            dispatch({ type: 'GET_ALL_USERS_DATA', payload: { users: data, isLoading: isLoading, isError: isError } });
+            userDispatch(getAllUsersSuccess(data));
+            // dispatch({ type: 'GET_ALL_USERS_DATA', payload: { users: data, isLoading: isLoading, isError: isError } });
         } catch (error) {
-            setError(error);
+            userDispatch(getAllUsersFailure());
         }
     }
 
@@ -41,23 +57,17 @@ export const useGetUserData = () => {
         if (!user) {
             return;
         }
-        setLoading(true);
-        setError(null);
-        const response = await axios.get(`/getSingleSignupUserData/${id}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        });
+        userDispatch(getSingleUserStart());
+        const response = await axios.get(`/getSingleSignupUserData/${id}`);
 
         const data = response.data;
         if (response.status == 200) {
-            setLoading(false);
-            console.log(data);
-            dispatch({ type: 'GET_SINGLE_USER_DATA', payload: { user: data, isLoading: isLoading } });
+            userDispatch(getSingleUserSuccess(data));
+            // dispatch({ type: 'GET_SINGLE_USER_DATA', payload: { user: data, isLoading: isLoading } });
             return;
         } else {
-            setError(data.error);
+            toast.error(data.error);
+            userDispatch(getSingleUserFailure(data.error));
         }
     }
 
@@ -65,37 +75,32 @@ export const useGetUserData = () => {
         if (!user) {
             return;
         }
-        setLoading(true);
-        setError(null);
-
+        userDispatch(getUpdateUserStart());
         try {
             // Make a PUT request using Axios
-            const response = await axios.put(
-                `/updateSingleSignupUserData/${id}`,
-                updatedUserData
-            );
+            const response = await axios.put(`/updateSingleSignupUserData/${id}`, updatedUserData);
 
             // Check the response status code, Axios handles it automatically
             if (response.status !== 200) {
                 toast.error(response.data.error);
-                setError(response.data.error);
-                setLoading(false);
+                userDispatch(getUpdateUserFailure(response.data.error));
                 return;
             }
             
-            setLoading(false);
             getUserData(id);
-            let userDetails = {
-                user: response.data,
-                token:user.token,
-                email:user.email,
-            }
-            dispatch({ type: 'UPDATE_SINGLE_USER_DATA', payload: { user: response.data } });
-            dispatchFromAuth({type: 'UPDATE_SINGLE_USER_DATA', payload: userDetails});
-            localStorage.setItem('user', JSON.stringify(userDetails));
+            // let userDetails = {
+            //     user: response.data,
+            //     token: token,
+            //     email:user.email,
+            // }
+            userDispatch(getUpdateUserSuccess(response.data));
+            userDispatch(loginUserUpdateSuccess(response.data));
+            // dispatch({ type: 'UPDATE_SINGLE_USER_DATA', payload: { user: response.data } });
+            // dispatchFromAuth({type: 'UPDATE_SINGLE_USER_DATA', payload: userDetails});
+            // localStorage.setItem('user', JSON.stringify(userDetails));
             navigate('/allSignUpUsers');
         } catch (error) {
-            setError("An error occurred while updating the user.");
+            userDispatch(getUpdateUserFailure(error.response.data.error));
         }
     };
 
@@ -103,23 +108,26 @@ export const useGetUserData = () => {
         if (!user) {
             return;
         }
-        setLoading(true);
-        setError(null);
-
-        const response = await axios.delete(`/deleteSingleSignupUserData/${id}`);
-        const data = response.data;
-        if (response.status !== 200) {
-            setError(data.error);
-            toast.error(data.error);
-            setLoading(false);
-            return;
+        userDispatch(deleteUserStart());
+        try {
+            const response = await axios.delete(`/deleteSingleSignupUserData/${id}`);
+            const data = response.data;
+            if (response.status !== 200) {
+                toast.error(data.error);
+                userDispatch(deleteUserFailure(data.error));
+                return;
+            }
+            localStorage.removeItem('user');
+            // dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
+            // dispatchFromAuth({type: 'LOGOUT'});
+            userDispatch(deleteUserSuccess(data));
+            userDispatch(logoutSuccess());
+            toast.success('Your logged out successfully.')
+            navigate('/');
+        } catch (error) {
+            userDispatch(deleteUserFailure(error));
         }
-        setLoading(false);
-        localStorage.removeItem('user');
-        dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
-        dispatchFromAuth({type: 'LOGOUT'});
-        toast.success('Your logged out successfull.')
-        navigate('/');
+
     };
 
 

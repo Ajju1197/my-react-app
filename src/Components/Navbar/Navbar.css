@@ -179,7 +179,7 @@
 }
 
 /* search Class */
-.searchInputClass{
+/* .searchInputClass{
     display: flex;
     position: relative;
     transition: all 0.5s ease-in;
@@ -207,4 +207,14 @@
 .searchInputClass:hover > input{
     opacity: 1;
     transition: all 0.5s ease-in;
+} */
+
+.searchInputClass > input,
+.searchInputClass > input:focus{
+    background-color: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+    color: var(--aqua);
 }
