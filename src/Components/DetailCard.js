@@ -40,7 +40,7 @@ function DetailCard({signUpUserDetails}) {
 
                     </div>
                 </div>
-                <div className='signUpUserDetailsFieldsClass'>
+                <div className={user ? 'signUpUserDetailsFieldsSingleRowClass' : 'signUpUserDetailsFieldsClass'}>
                     <div className="mernInputStyleClass ">
                         <input
                             type="text"

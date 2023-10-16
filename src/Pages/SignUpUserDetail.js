@@ -91,6 +91,7 @@ function SignUpUserDetail() {
     }
 
     const signUpUserDetails = {
+        user,
         isAuthorized,
         selectedImage,
         handleImageClick,

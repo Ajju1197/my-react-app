@@ -264,6 +264,7 @@ a{
 }
 .mernInputStyleClass input{
   border: 1px solid aqua;
+  border-right-width:6px;
 }
 
 .mernInputStyleClass  input:focus{
@@ -343,6 +344,12 @@ a{
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  gap: 10px;
+}
+.signUpUserDetailsFieldsSingleRowClass{
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 50%;
   gap: 10px;
 }
 .registerFormBlock{
