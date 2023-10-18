@@ -354,6 +354,58 @@ a{
 }
 .registerFormBlock{
   width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.userRegister{
+  flex: 1 0 47%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 10px;
+}
+.userRegister .signUpUserDetailsFieldsSingleRowClass{
+  width: 100%;
+}
+.userDetailsLeftImageBlock{
+  flex: 3 0 50%;
+  display: flex;
+  justify-content: center;
+}
+.leftUserImage{
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
+.leftUserImage::before{
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  border: 1px solid aqua;
+  border-top: none;
+  border-left: none;
+  right: -10px;
+  bottom: -10px;
+}
+.leftUserImage::after{
+  content: '';
+  position: absolute;
+  width: 90%;
+  height: 80%;
+  border: 1px solid aqua;
+  border-bottom: none;
+  border-right: none;
+  left: -10px;
+  top: -10px;
+}
+.leftUserImage img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .spinner-border{
   width: 20px !important;

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAxios } from "../Contexts/useAxios";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { 
     getAllUsersStart, 
     getAllUsersSuccess, 
@@ -27,7 +28,7 @@ export const useGetUserData = () => {
     const [isLoading, setLoading] = useState(null);
     const { dispatchFromAuth } = useAuthContext();
     const navigate = useNavigate();
-    const axios = useAxios();
+    const useAxiosApi = useAxios();
     const { dispatch } = useGetUserContext();
 
     const currUser = useSelector(state => state.login);
@@ -39,7 +40,7 @@ export const useGetUserData = () => {
         userDispatch(getAllUsersStart());
 
         try {
-            const response = await axios.get(`/getAllSignupUserData/?q=${query}`);
+            const response = await useAxiosApi.get(`/getAllSignupUserData/?q=${query}`);
             const data = response.data;
             if (response.status !== 200 || data.length == 0) {
                 toast.error(data.error);
@@ -58,7 +59,7 @@ export const useGetUserData = () => {
             return;
         }
         userDispatch(getSingleUserStart());
-        const response = await axios.get(`/getSingleSignupUserData/${id}`);
+        const response = await useAxiosApi.get(`/getSingleSignupUserData/${id}`);
 
         const data = response.data;
         if (response.status == 200) {
@@ -78,7 +79,11 @@ export const useGetUserData = () => {
         userDispatch(getUpdateUserStart());
         try {
             // Make a PUT request using Axios
-            const response = await axios.put(`/updateSingleSignupUserData/${id}`, updatedUserData);
+            const response = await axios.put(`https://mern-server-k0zl.onrender.com/api/updateSingleSignupUserData/${id}`, updatedUserData, {
+                    headers: {
+                    'Content-Type': 'multipart/form-data'
+                    }
+                });
 
             // Check the response status code, Axios handles it automatically
             if (response.status !== 200) {
@@ -110,7 +115,7 @@ export const useGetUserData = () => {
         }
         userDispatch(deleteUserStart());
         try {
-            const response = await axios.delete(`/deleteSingleSignupUserData/${id}`);
+            const response = await useAxiosApi.delete(`/deleteSingleSignupUserData/${id}`);
             const data = response.data;
             if (response.status !== 200) {
                 toast.error(data.error);
@@ -121,6 +126,7 @@ export const useGetUserData = () => {
             // dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
             // dispatchFromAuth({type: 'LOGOUT'});
             userDispatch(deleteUserSuccess(data));
+            console.log('This is Deleted User', data)
             userDispatch(logoutSuccess());
             toast.success('Your logged out successfully.')
             navigate('/');
@@ -137,7 +143,7 @@ export const useGetUserData = () => {
         }
         setLoading(true);
         setError(null);
-        const response = await axios.get(`/aboutUserDetails`);
+        const response = await useAxiosApi.get(`/aboutUserDetails`);
 
         const data = response.data;
         if (response.status == 200) {

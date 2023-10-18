@@ -1,39 +1,45 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAxios } from "../Contexts/useAxios";
-
-const { useState } = require("react");
-const { useAuthContext } = require("./useAuthContext");
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import {
+    signUpStart,
+    signUpSuccess,
+    signUpFailure,
+} from '../Redux/slices/authSlice'
 
 export const useSignup = () => {
-    const [isError, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
-    const { dispatchFromAuth } = useAuthContext();
     const navigate = useNavigate();
-    const axios = useAxios();
+    // const axios = useAxios();
+
+    const dispatch = useDispatch();
 
     const signup = async (user) => {
-        setIsLoading(true);
-        setError(null);
+
+        console.log('This is from singup first', user);
         try {
-            // const response = await axios.post('/signup', user);
-            const response = await axios.post('https://mern-server-k0zl.onrender.com/api/signup', user);
-                console.log(response);
-                if (response.status !== 200) {
-                    setIsLoading(false);
-                    setError(response.error);
-                    toast.error(response.error);
-                    return;
+            dispatch(signUpStart());
+            const response = await axios.post('https://mern-server-k0zl.onrender.com/api/signup', user, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
                 }
-                setIsLoading(false);
-                // toast.success(json.success);
-                navigate('/');
+            });
+            if (response.status !== 200) {
+                dispatch(signUpFailure(response.error));
+                toast.error(response.error);
+                return;
+            }
+            dispatch(signUpSuccess(response.data.user));
+            console.log('This is from signup ', response)
+            toast.success(response.data.success);
+            navigate('/');
         } catch (error) {
-            toast.error(error.response.data.error);
-            setIsLoading(false);
+                toast.error(error.response.data.error);
+                dispatch(signUpFailure(error.response.data.error));
         }
 
     }
 
-    return { signup, isError, isLoading };
+    return { signup };
 }

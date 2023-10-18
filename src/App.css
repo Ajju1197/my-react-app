@@ -4,12 +4,16 @@
   text-align: center;
   position: relative;
   height: 100vh;
+  background-color: var(--primary);
+  color: var(--light);
 }
 
 .withOutSideNavAppClass {
   text-align: center;
   position: relative;
   height: 100vh;
+  background-color: var(--primary);
+  color: var(--light);
 }
 
 .SideNavOpenClass{
@@ -44,11 +48,10 @@
 }
 
 .appSideNavBodyContentClass{
-  background-color: var(--primary);
-  color: var(--light);
+  /* background-color: var(--primary); */
   display: flex;
   justify-content: flex-end;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .App-logo {

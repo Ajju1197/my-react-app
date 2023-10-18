@@ -16,29 +16,46 @@ function DetailCard({signUpUserDetails}) {
     const navigate = useNavigate();
     return (
         <div className="registerFormBlock">
+            {
+                user && 
+                <div className='userDetailsLeftImageBlock'>
+                    <div className='leftUserImage'>
+                        {selectedImage ? (
+                                <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
+                            ) : formData.profileImage ? (
+                                <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + formData.profileImage} alt={formData.name} />
+                            ) : (
+                                <img src={syedProfile} alt={formData.name} />
+                            )}
+                    </div>
+                </div>
+            }
             <form
                 onSubmit={handleSubmit}
                 name="register-form"
                 id="register-form"
-                className="registerForm"
+                className={user ? 'userRegister' : 'registerForm'}
             >
                 <div className="userProfile" onClick={handleImageClick}>
-                    <div className='userImage'>
-                        {selectedImage ? (
-                            <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
-                        ) : formData.profileImage ? (
-                            <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + formData.profileImage} alt={formData.name} />
-                        ) : (
-                            <img src={syedProfile} alt={formData.name} />
-                        )}
-                        <div className='editIcon'>
-                            <label htmlFor="imageUpload">
-                                <img src={editIcon} alt="editIcon" />
-                            </label>
-                            <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
-                        </div>
+                    {
+                        !user && 
+                        <div className='userImage'>
+                            {selectedImage ? (
+                                <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
+                            ) : formData.profileImage ? (
+                                <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + formData.profileImage} alt={formData.name} />
+                            ) : (
+                                <img src={syedProfile} alt={formData.name} />
+                            )}
+                            <div className='editIcon'>
+                                <label htmlFor="imageUpload">
+                                    <img src={editIcon} alt="editIcon" />
+                                </label>
+                                <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
+                            </div>
 
-                    </div>
+                        </div>
+                    }
                 </div>
                 <div className={user ? 'signUpUserDetailsFieldsSingleRowClass' : 'signUpUserDetailsFieldsClass'}>
                     <div className="mernInputStyleClass ">

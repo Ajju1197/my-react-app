@@ -4,11 +4,12 @@ import { useSignup } from '../../Hooks/useSignup';
 import DetailCard from '../DetailCard';
 import './LoginSignUp.css'
 import '../../Pages/PagesStyles.css'
+import { useSelector } from 'react-redux';
 
 function Signup() {
 
     const inputRef = useRef();
-    const { signup, isError, isLoading } = useSignup();
+    const { signup } = useSignup();
     const [selectedImage, setSelectedImage] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(true);
 
@@ -21,6 +22,9 @@ function Signup() {
         cpassword: "",
         profileImage: "",
     });
+
+    const currUser = useSelector(state => state.login);
+    const {isLoading, isError} = currUser;
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +43,8 @@ function Signup() {
         formDataObj.append('password', formData.password);
         formDataObj.append('cpassword', formData.cpassword);
         formDataObj.append('profileImage', formData.profileImage);
+
+        console.log('This is from singup page', formData.profileImage);
         
         await signup(formDataObj);
     }
@@ -52,6 +58,7 @@ function Signup() {
     const handleImageChange = (e) => {
         const fileSelected = e?.target?.files[0];
         setSelectedImage(fileSelected);
+        console.log('This fromm signup image', fileSelected);
         setFormData({...formData, profileImage: fileSelected});
     }
 
