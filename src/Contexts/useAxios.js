@@ -9,7 +9,7 @@ export const useAxios = () => {
 
         const newAxiosInstance = axios.create({
             // baseURL: 'https://mern-server-k0zl.onrender.com/api',
-            baseURL: 'http://localhost:5000/api',
+            baseURL: 'https://mern-server-k0zl.onrender.com/api',
             // timeout: 8000,
             headers: user ? {
                 'Authorization': `Bearer ${token}`
