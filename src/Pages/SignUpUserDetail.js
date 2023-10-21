@@ -35,7 +35,7 @@ function SignUpUserDetail() {
     useEffect(() => {
         // Fetch the user data when the component mounts
         getUserData(params.id);
-    }, []);
+    }, [params]);
 
     useEffect(() => {
         setFormData({
@@ -48,7 +48,7 @@ function SignUpUserDetail() {
         if(user._id === params.id){
             setIsAuthorized(true);
         }
-    },[singleUser]);
+    },[singleUser, params]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

@@ -4,10 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faShare } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios';
+import { useProductCart } from '../../Hooks/useProductCart';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '../../Redux/slices/productCartSlice';
 
 function AllProducts() {
     const [products, setProducts] = useState([]);
     const [errorMessage, setErrMsg] = useState('');
+
+    const {productAddToCart} = useProductCart();
+    const dispatch = useDispatch();
 
     useEffect( () => {
         axios.get('https://fakestoreapi.com/products')
@@ -17,14 +23,18 @@ function AllProducts() {
         .catch(err => {
             setErrMsg(err);
         })
-    }, [])
+    }, []);
+
+    const handleAddToCart = (eachItem) => {
+        dispatch(addToCart(eachItem));
+    }
     return (
         <div className='productList'>
             {
                 products && products.length > 0 ? (
                     products.map((eachItem) => (
                         <div className='productCart' key={eachItem.id}>
-                            <Link className='card productsClass' to={`productDetails/${eachItem.id}`}>
+                            <div className='card productsClass'>
                                 <div className='productImage'>
                                     <img src={eachItem.image} alt={eachItem.title} />
                                 </div>
@@ -32,7 +42,11 @@ function AllProducts() {
                                     <h1>{eachItem.title}</h1>
                                     <p>{eachItem.description}</p>
                                 </div>
-                            </Link>
+                                <div className='d-flex gap-2 align-items-center p-3 justify-center'>
+                                    <button type='button' className='btn btn-primary bg-dark' onClick={() => handleAddToCart(eachItem)}>Add To Cart</button>
+                                    <Link type='button' className='btn btn-primary bg-dark text-white' to={`productDetails/${eachItem.id}`}>View Product Details</Link>
+                                </div>
+                            </div>
                             <div className='social-icons'>
                                 <FontAwesomeIcon icon={faFacebook} className='iconsStylingClass' />
                                 <FontAwesomeIcon icon={faInstagram} className='iconsStylingClass' />

@@ -18,7 +18,7 @@ function DetailCard({signUpUserDetails}) {
         <div className="registerFormBlock">
             {
                 user && 
-                <div className='userDetailsLeftImageBlock'>
+                <div className='userDetailsLeftImageBlock' onClick={handleImageClick}>
                     <div className='leftUserImage'>
                         {selectedImage ? (
                                 <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
@@ -27,6 +27,9 @@ function DetailCard({signUpUserDetails}) {
                             ) : (
                                 <img src={syedProfile} alt={formData.name} />
                             )}
+                            <div className='editIcon'>
+                                <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
+                            </div>
                     </div>
                 </div>
             }

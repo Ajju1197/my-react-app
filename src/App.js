@@ -48,11 +48,10 @@ const App = () => {
   }
   
   useEffect(() => {
-    const LoginUser = JSON.parse(localStorage.getItem('user'));
-    if(LoginUser) window.document.title = `MERN | ${LoginUser.user.name}`;
-    if(!user){
-      setShowSideNav(false);
-    }
+    // const LoginUser = JSON.parse(localStorage.getItem('user'));
+    if(user) window.document.title = `MERN | ${user.name}`;
+    else setShowSideNav(false);
+    
   },[user])
 
   const toasterStyle = {

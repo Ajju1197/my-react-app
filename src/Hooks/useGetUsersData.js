@@ -79,8 +79,9 @@ export const useGetUserData = () => {
         userDispatch(getUpdateUserStart());
         try {
             // Make a PUT request using Axios
-            const response = await axios.put(`https://mern-server-k0zl.onrender.com/api/updateSingleSignupUserData/${id}`, updatedUserData, {
+            const response = await axios.put(`http://localhost:5000/api/updateSingleSignupUserData/${id}`, updatedUserData, {
                     headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                     }
                 });

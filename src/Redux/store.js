@@ -1,14 +1,14 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import loginReducer from './slices/authSlice';
-import { createStore, applyMiddleware } from 'redux';
 import getAllUsersReducer from './slices/getAllUsersSlice';
+import productCartReducer from './slices/productCartSlice';
 import { persistReducer, persistStore } from 'redux-persist';
-import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 
 const rootReducer = combineReducers({
     login: loginReducer,
     users: getAllUsersReducer,
+    productCart: productCartReducer,
 })
 
 const persistConfig = {
