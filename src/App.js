@@ -75,31 +75,31 @@ const App = () => {
           <div className={showSideNav ? 'sideNavWidthClass' : 'sideNavHideClass'}>
             <SideNav toggleSideNav={toggleSideNav} showSideNav={showSideNav} />
           </div>
-        <div className={showSideNav ? 'right-block' : 'rightBlockWithoutSideNav'}>
-              <div className='content'>
-                  <Routes>
-                        <Route path="/home" element={<Home/>} />;
-                        <Route path="/allSignUpUsers" element={user ? <AllSignUpUsers/> : <Navigate to="/"/>} />;
-                        <Route path="/blogs" element={user ? <Blogs/> : <Navigate to="/"/>} />;
-                        <Route path="/postBlog" element={user ? <PostBlogs/> : <Navigate to="/"/>} />;
-                        <Route path="/blogDetails/:id" element={user ? <BlogDetails/> : <Navigate to="/"/>} />;
-                        <Route path="/userDetails/:id" element={user ? <SignUpUserDetail/> : <Navigate to="/"/>} />;
-                        <Route path="/userProfile" exact element={user ? <UserProfile/> : <Navigate to="/"/>} />;
-                        <Route path="/setting" exact element={user ? <Settings/> : <Navigate to="/"/>} />;
-                        <Route path="/" exact element={ user ? <Home/> :  <Login/>}/>;
-                        {/* <Route path="orderSummary" element={<OrderSummary />} /> */}
-                        <Route path="/about" element={user ? <About /> : <Navigate to="/" />} />;
-                        <Route path="/register" element={!user ? <SignUp /> : <Navigate to="/" />} />;
-                        <Route path="product" element={ user ? <Product /> : <Navigate to="/" />}>
-                          <Route index element={<AllProducts />} />
-                          <Route path="featuredProducts" element={<FeaturedProducts />} />
-                          <Route path="newProducts" element={<NewProducts />} />
-                        </Route>
-                        <Route path="product/productDetails/:id" element={<ProductDetails />} />
-                        <Route path="*" element={<PageNotFound/>}/>
-                  </Routes>
-              </div>
-        </div>
+          <div className={showSideNav ? 'right-block' : 'rightBlockWithoutSideNav'}>
+                <div className='content'>
+                    <Routes>
+                          <Route path="/home" element={<Home/>} />;
+                          <Route path="/allSignUpUsers" element={user ? <AllSignUpUsers/> : <Navigate to="/"/>} />;
+                          <Route path="/blogs" element={user ? <Blogs/> : <Navigate to="/"/>} />;
+                          <Route path="/postBlog" element={user ? <PostBlogs/> : <Navigate to="/"/>} />;
+                          <Route path="/blogDetails/:id" element={user ? <BlogDetails/> : <Navigate to="/"/>} />;
+                          <Route path="/userDetails/:id" element={user ? <SignUpUserDetail/> : <Navigate to="/"/>} />;
+                          <Route path="/userProfile" exact element={user ? <UserProfile/> : <Navigate to="/"/>} />;
+                          <Route path="/setting" exact element={user ? <Settings/> : <Navigate to="/"/>} />;
+                          <Route path="/" exact element={ user ? <Home/> :  <Login/>}/>;
+                          {/* <Route path="orderSummary" element={<OrderSummary />} /> */}
+                          <Route path="/about" element={user ? <About /> : <Navigate to="/" />} />;
+                          <Route path="/register" element={!user ? <SignUp /> : <Navigate to="/" />} />;
+                          <Route path="product" element={ user ? <Product /> : <Navigate to="/" />}>
+                            <Route index element={<AllProducts />} />
+                            <Route path="featuredProducts" element={<FeaturedProducts />} />
+                            <Route path="newProducts" element={<NewProducts />} />
+                          </Route>
+                          <Route path="product/productDetails/:id" element={<ProductDetails />} />
+                          <Route path="*" element={<PageNotFound/>}/>
+                    </Routes>
+                </div>
+          </div>
       </div>
       {user ? (
         <div className={showSideNav ? 'SideNavOpenIconHide' : 'SideNavOpenClass'} onClick={toggleSideNav}>

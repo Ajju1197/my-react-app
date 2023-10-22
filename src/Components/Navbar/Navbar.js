@@ -68,7 +68,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar py-2 px-5" style={styleToNavBar}>
+            <nav className="navbar px-1" style={styleToNavBar}>
                 <Link to='/home' style={logoStyle}>
                     <h1 className='logo' style={location.pathname === '/home' ? logoInDarkMode : logoInLightMode}>PROFILE</h1>
                     <small className='sphereClass'>SPHERE</small>

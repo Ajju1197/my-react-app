@@ -133,6 +133,7 @@ export const useGetUserData = () => {
             navigate('/');
         } catch (error) {
             userDispatch(deleteUserFailure(error));
+            toast.error(error.data.error);
         }
 
     };

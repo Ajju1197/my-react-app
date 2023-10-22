@@ -17,7 +17,7 @@ function SignUpUserDetail() {
     const inputRef = useRef();
     const [isAuthorized, setIsAuthorized] = useState(false);
 
-    const {singleUser} = useSelector(state => state.users);
+    const {singleUser, isLoding} = useSelector(state => state.users);
     const currUser = useSelector(state => state.login);
     const {user} = currUser.user;
     // Initialize formData with default values matching your data structure
@@ -103,6 +103,7 @@ function SignUpUserDetail() {
         handleSubmit,
         handleInputChange,
         handleImageChange,
+        isLoading,
     }
 
     return (
