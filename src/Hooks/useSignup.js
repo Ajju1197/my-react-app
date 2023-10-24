@@ -30,7 +30,7 @@ export const useSignup = () => {
                 toast.error(response.error);
                 return;
             }
-            dispatch(signUpSuccess(response.data.user));
+            dispatch(signUpSuccess());
             console.log('This is from signup ', response)
             toast.success(response.data.success);
             navigate('/');

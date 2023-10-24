@@ -1,6 +1,4 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import './App.css';
 import './Contexts/useAxios';
@@ -101,12 +99,6 @@ const App = () => {
                 </div>
           </div>
       </div>
-      {user ? (
-        <div className={showSideNav ? 'SideNavOpenIconHide' : 'SideNavOpenClass'} onClick={toggleSideNav}>
-          <FontAwesomeIcon icon={faArrowRightFromBracket} />
-        </div>) :
-        null
-      }
     </div>
   );
 }

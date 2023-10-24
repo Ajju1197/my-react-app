@@ -17,31 +17,31 @@
 }
 
 .SideNavOpenClass{
-  position: fixed;
+  /* position: fixed; */
   left: 0px;
   top: 10px;
-  background-color: var(--light);
-  color: var(--primary);
+  /* background-color: var(--light); */
+  color: var(--light);
   font-size: 20px;
   cursor: pointer;
   padding: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  z-index: 10002;
+  /* border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px; */
+  /* z-index: 10002; */
   transition: all 0.4s ease-in-out;
 }
 
 .SideNavOpenIconHide{
-  position: fixed;
+  /* position: fixed; */
   left: 0px;
-  background-color: var(--light);
-  color: var(--primary);
+  /* background-color: var(--light); */
+  color: var(--light);
   top: 10px;
   font-size: 20px;
-  z-index: 10002;
+  /* z-index: 10002; */
   cursor: pointer;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  /* border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px; */
   transition: all 0.4s ease-in-out;
   rotate: 180deg;
   padding: 10px;
@@ -195,13 +195,32 @@
 }
 
 @media (max-width:768px) {
-  .sideNavWidthClass,.emailColorDarkClass,.SideNavOpenIconHide{
+  .emailColorDarkClass,.emailColorWhiteClass{
     display: none;
   }
   .appSideNavBodyContentClass{
     justify-content: center;
   }
-  .main-block{
-    width: 100%;
+
+  .sideNavWidthClass{
+    z-index: 999;
+    height: 100%;
+    padding: 5rem 0;
+    padding-bottom: 0px !important;
+    background-color: var(--primary);
+    position: fixed;
+    left: 0;
+    max-width: 300px !important;
+    min-width: 250px !important;
+    transition: all 0.4s ease-in-out;
+  }
+  .right-block{
+    width: 100% !important;
+  }
+  .homePageClass{
+    background: none !important;
+  }
+  .homePageTitle{
+    font-size: 2rem !important;
   }
 }

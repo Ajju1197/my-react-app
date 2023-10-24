@@ -82,7 +82,6 @@ export const useGetUserData = () => {
             const response = await axios.put(`https://mern-server-k0zl.onrender.com/api/updateSingleSignupUserData/${id}`, updatedUserData, {
                     headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
                     }
                 });
 

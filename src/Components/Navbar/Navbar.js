@@ -10,8 +10,10 @@ import Form from '../Form';
 import searchIcon from '../../images/search.svg';
 import { useSelector } from 'react-redux';
 import { useGetUserData } from '../../Hooks/useGetUsersData';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Navbar = () => {
+const Navbar = ({toggleSideNav, showSideNav}) => {
     // const {user} = useAuthContext();
     const [styleToNavBar, setStyleToNavbar] = useState({});
     const location = useLocation();
@@ -68,11 +70,19 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="navbar px-1" style={styleToNavBar}>
-                <Link to='/home' style={logoStyle}>
-                    <h1 className='logo' style={location.pathname === '/home' ? logoInDarkMode : logoInLightMode}>PROFILE</h1>
-                    <small className='sphereClass'>SPHERE</small>
-                </Link>
+            <nav className="navbar px-4" style={styleToNavBar}>
+                <div className='d-flex align-items-center'>
+                    <Link to='/home' style={logoStyle}>
+                        <h1 className='logo' style={location.pathname === '/home' ? logoInDarkMode : logoInLightMode}>PROFILE</h1>
+                        <small className='sphereClass'>SPHERE</small>
+                    </Link>
+                    {user ? (
+                        <div className={showSideNav ? 'SideNavOpenIconHide' : 'SideNavOpenClass'} onClick={toggleSideNav}>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                        </div>) :
+                        null
+                    }
+                </div>
                 <div className={`${location.pathname === '/home' ? 'homeProfileClass' : 'profileClass'} d-flex align-items-center`}>
                     {
                         pathNames.includes(location.pathname) ? (

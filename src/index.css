@@ -361,23 +361,23 @@ a{
   align-items: center;
 }
 .userRegister{
-  flex: 1 0 47%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: 10px;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 .userRegister .signUpUserDetailsFieldsSingleRowClass{
-  width: 100%;
+  flex: 1 0 300px;
 }
 .userDetailsLeftImageBlock{
-  flex: 3 0 50%;
+  flex: 3 0 300px;
   display: flex;
   justify-content: center;
 }
 .leftUserImage{
-  height: 400px;
-  width: 400px;
+  height: 50vh;
+  width: 30vw;
   position: relative;
 }
 .leftUserImage::before{

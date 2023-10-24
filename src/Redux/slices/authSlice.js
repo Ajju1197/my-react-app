@@ -13,7 +13,6 @@ export const loginSlice = createSlice({
             state.isLoading = true;
         },
         signUpSuccess:(state, action) => {
-            state.user = action.payload;
             state.isLoading = false;
         },
         signUpFailure:(state, action) => {

@@ -16,40 +16,38 @@ function DetailCard({signUpUserDetails}) {
     const navigate = useNavigate();
     return (
         <div className="registerFormBlock">
-            {
-                user && 
-                <div className='userDetailsLeftImageBlock' onClick={handleImageClick}>
-                    <div className='leftUserImage'>
-                        {selectedImage ? (
-                                <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
-                            ) : formData.profileImage ? (
-                                <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + formData.profileImage} alt={formData.name} />
-                            ) : (
-                                <img src={syedProfile} alt={formData.name} />
-                            )}
-                            <div className='editIcon'>
-                                <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
-                            </div>
-                    </div>
-                </div>
-            }
             <form
                 onSubmit={handleSubmit}
                 name="register-form"
                 id="register-form"
                 className={user ? 'userRegister' : 'registerForm'}
             >
-                <div className="userProfile" onClick={handleImageClick}>
-                    {
-                        !user && 
-                        <div className='userImage'>
+                {
+                    user && 
+                    <div className='userDetailsLeftImageBlock' onClick={handleImageClick}>
+                        <div className='leftUserImage'>
                             {selectedImage ? (
-                                <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
-                            ) : formData.profileImage ? (
-                                <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + formData.profileImage} alt={formData.name} />
-                            ) : (
-                                <img src={syedProfile} alt={formData.name} />
-                            )}
+                                    <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
+                                ) : (
+                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || syedProfile} alt={formData.name} />
+                                )}
+                                <div className='editIcon'>
+                                    <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
+                                </div>
+                        </div>
+                    </div>
+                }
+                {
+                    !user && 
+                    <div className="userProfile" onClick={handleImageClick}>
+                        <div className='userImage'>
+                            {
+                                selectedImage ? (
+                                    <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
+                                ) : (
+                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || syedProfile} alt={formData.name} />
+                                ) 
+                            }
                             <div className='editIcon'>
                                 <label htmlFor="imageUpload">
                                     <img src={editIcon} alt="editIcon" />
@@ -58,8 +56,8 @@ function DetailCard({signUpUserDetails}) {
                             </div>
 
                         </div>
-                    }
-                </div>
+                    </div>
+                }
                 <div className={user ? 'signUpUserDetailsFieldsSingleRowClass' : 'signUpUserDetailsFieldsClass'}>
                     <div className="mernInputStyleClass ">
                         <input
@@ -114,21 +112,23 @@ function DetailCard({signUpUserDetails}) {
                         />
                         <label>Work</label>
                     </div>
+                <div className=''>
+                    {
+                        !user ? (
+                            <div className='signUpUserDetailsFieldsClass'>
+                                <div className='mernInputStyleClass '>
+                                    <input type='password' value={formData.password} onChange={handleInputChange} placeholder=' ' className='form-control' name="password" id="password" autoComplete='off' />
+                                    <label>Password</label>
+                                </div>
+                                <div className='mernInputStyleClass '>
+                                    <input type='password' value={formData.cpassword} onChange={handleInputChange} placeholder=' ' className='form-control' name="cpassword" id="cpassword" autoComplete='off' />
+                                    <label>Confirm Password</label>
+                                </div>
+                            </div>
+                        ) : null
+                    }
                 </div>
-                {
-                    !user ? (
-                        <div className='signUpUserDetailsFieldsClass'>
-                        <div className='mernInputStyleClass '>
-                                <input type='password' value={formData.password} onChange={handleInputChange} placeholder=' ' className='form-control' name="password" id="password" autoComplete='off' />
-                                <label>Password</label>
-                            </div>
-                            <div className='mernInputStyleClass '>
-                                <input type='password' value={formData.cpassword} onChange={handleInputChange} placeholder=' ' className='form-control' name="cpassword" id="cpassword" autoComplete='off' />
-                                <label>Confirm Password</label>
-                            </div>
-                        </div>
-                    ) : null
-                }
+                </div>
                 <div className=" d-flex justify-content-center align-content-center gap-x-3">
                     {
                         isAuthorized ?

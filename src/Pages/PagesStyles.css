@@ -1,20 +1,20 @@
 /* Home Page Styling */
 .homePageClass,.aboutPageClass,.product,.userProfilePageClass,.allBlogsPageClass,.blogDetailsPageClass{
     /* height: ; */
-    height: calc(100vh - 109px);
+    height: calc(100vh - 80px);
     overflow-y: auto;
     padding: 15px;
 }
 .homePageClass {
     position: relative;
-    background-size: 40%;
+    background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: right center;
-    background-image: url(../images/SyedAjmath.jpg);
+    background-image: url(../images/ajju_goa-removebg-preview.png);
 }
 
-.homePageClass::before {
+/* .homePageClass::before {
     content: "";
     background: rgba(5, 13, 24, 0.3);
     position: absolute;
@@ -23,19 +23,19 @@
     left: 0;
     right: 0;
     z-index: 1;
-}
+} */
 
 .main-block {
     /* background: linear-gradient(to right, #151516, #3c3e40, #666c6c, #979d9a, #151516); */
-    background-color: var(--primary);
-    position: absolute;
+    /* background-color: var(--primary); */
+    /* position: absolute; */
     left: 0;
     top: 0;
     height: 100%;
-    width: 62%;
+    /* width: 62%; */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     z-index: 1;
     gap: 2em;
@@ -44,7 +44,7 @@
 /* color: rgb(4,64,71); */
 .homePageTitle {
     color: rgb(247, 220, 79);
-    font-size: 4em;
+    font-size: 4rem;
     font-weight: 200;
     word-spacing: 4px;
     line-height: 56px;
