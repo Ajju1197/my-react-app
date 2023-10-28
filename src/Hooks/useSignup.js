@@ -20,7 +20,7 @@ export const useSignup = () => {
         console.log('This is from singup first', user);
         try {
             dispatch(signUpStart());
-            const response = await axios.post('https://mern-server-k0zl.onrender.com/api/signup', user, {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_API}/signup`, user, {
                 headers: {
                 'Content-Type': 'multipart/form-data'
                 }

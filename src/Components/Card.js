@@ -4,6 +4,7 @@ import '../Pages/PagesStyles.css';
 import trash from '../images/trash.svg'
 import edit from '../images/editIcon.svg'
 import view from '../images/viewIcon.svg'
+import profile from '../images/userProfile.png'
 
 function Card({userDetails, userHandleDeleteClick}) {
     return (
@@ -12,7 +13,7 @@ function Card({userDetails, userHandleDeleteClick}) {
                 <div className="overlaycard"></div>
                 {userDetails.isActive ? <div className="activeUser"></div> : <div className="nonActiveUser"></div>}
                 <div className="card-left-block">
-                    <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + userDetails.profileImage} alt={userDetails.name} />
+                    <img src={`${process.env.REACT_APP_SERVER_IMAGE_PATH}${userDetails.profileImage}` || profile} alt={userDetails.name} />
                 </div>
                 <div className='card-right-block'>
                     <div className='userHeadingClass'>

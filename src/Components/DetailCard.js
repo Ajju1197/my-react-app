@@ -2,7 +2,6 @@ import React from 'react';
 import syedProfile from '../images/SyedAjmath.jpg';
 import editIcon from '../images/editIcon.svg';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../Hooks/useAuthContext';
 import '../App.css';
 import '../Pages/PagesStyles.css';
 import '../Components/Logins/LoginSignUp.css'
@@ -10,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 function DetailCard({signUpUserDetails}) {
     const { isAuthorized, selectedImage, inputRef, formData, handleSubmit, handleInputChange, handleImageChange, handleImageClick, isLoading } = signUpUserDetails;
-    // const { user } = useAuthContext();
     const currUser = useSelector(state => state.login);
     const {user} = currUser.user;
     const navigate = useNavigate();
@@ -29,7 +27,7 @@ function DetailCard({signUpUserDetails}) {
                             {selectedImage ? (
                                     <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
                                 ) : (
-                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || syedProfile} alt={formData.name} />
+                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || (selectedImage && URL.createObjectURL(selectedImage))} alt={formData.name} />
                                 )}
                                 <div className='editIcon'>
                                     <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />
