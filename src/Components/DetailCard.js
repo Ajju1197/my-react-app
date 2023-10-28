@@ -110,10 +110,9 @@ function DetailCard({signUpUserDetails}) {
                         />
                         <label>Work</label>
                     </div>
-                <div className=''>
                     {
                         !user ? (
-                            <div className='signUpUserDetailsFieldsClass'>
+                            <>
                                 <div className='mernInputStyleClass '>
                                     <input type='password' value={formData.password} onChange={handleInputChange} placeholder=' ' className='form-control' name="password" id="password" autoComplete='off' />
                                     <label>Password</label>
@@ -122,14 +121,38 @@ function DetailCard({signUpUserDetails}) {
                                     <input type='password' value={formData.cpassword} onChange={handleInputChange} placeholder=' ' className='form-control' name="cpassword" id="cpassword" autoComplete='off' />
                                     <label>Confirm Password</label>
                                 </div>
-                            </div>
+                            </>
                         ) : null
                     }
-                </div>
-                </div>
-                <div className=" d-flex justify-content-center align-content-center gap-x-3">
                     {
-                        isAuthorized ?
+                        user &&
+                        <div className=" d-flex justify-content-center align-content-center gap-x-3">
+                            {
+                                isAuthorized ?
+                                <div className='btnLoginBtn'>
+                                    {
+                                        isLoading ? 
+                                        <div className="spinner-border" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div> : 
+                                        <span className="mernArrowIconClass"></span>
+                                    }
+                                    <input
+                                        type="submit"
+                                        name="register"
+                                        id="register"
+                                        className="aboutLoginBtn"
+                                        value={'Update'}
+                                    />
+                                </div> : null
+                            }
+                            {<button type='button' className='btnLoginBtn' onClick={() => navigate(-1)}>Go Back</button>}
+                        </div>
+                    }
+                </div>
+                {
+                    !user && 
+                    <div className=" d-flex justify-content-center align-content-center gap-x-3">
                         <div className='btnLoginBtn'>
                             {
                                 isLoading ? 
@@ -143,12 +166,11 @@ function DetailCard({signUpUserDetails}) {
                                 name="register"
                                 id="register"
                                 className="aboutLoginBtn"
-                                value={user ? 'Update' : 'Register'}
+                                value={'Register'}
                             />
-                        </div> : null
-                    }
-                    {user ? <button type='button' className='btnLoginBtn' onClick={() => navigate(-1)}>Go Back</button> : null}
-                </div>
+                        </div>
+                    </div>
+                }
             </form>
         </div>
 

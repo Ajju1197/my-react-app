@@ -32,8 +32,8 @@ function Login({onLogin}) {
 
     return (
         <div className="signUpFromMainDiv">
-            <div className='signUpFormBlock d-flex flex-row gap-4 justify-center card'>
-                <div className='registerForm p-5'>
+            <div className='signUpFormBlock card'>
+                <div className='loginRegisterForm p-5'>
                     <div>
                         <h4 className='authHeadingClass'>Login  Form</h4>
                     </div>
@@ -65,10 +65,8 @@ function Login({onLogin}) {
                             {/* {isError && <div className='bg-danger text-white p-2 mt-2 errorMsg'>{isError}</div>} */}
                     </form>
                 </div>
-                <div className=''>
-                    <div className='formImg'>
-                        <img src={formImg} alt="form-image" loading='lazy' />
-                    </div>
+                <div className='formImg'>
+                    <img src={formImg} alt="form-image" loading='lazy' />
                 </div>
             </div>
         </div>

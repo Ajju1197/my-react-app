@@ -116,23 +116,23 @@ export const useGetUserData = () => {
         userDispatch(deleteUserStart());
         try {
             const response = await useAxiosApi.delete(`/deleteSingleSignupUserData/${id}`);
-            const data = response.data;
             if (response.status !== 200) {
-                toast.error(data.error);
-                userDispatch(deleteUserFailure(data.error));
+                toast.error(response.data.error);
+                userDispatch(deleteUserFailure(response.data.error));
                 return;
             }
             localStorage.removeItem('user');
             // dispatch({ type: 'DELETE_SINGLE_USER_DATA', payload: data });
             // dispatchFromAuth({type: 'LOGOUT'});
-            userDispatch(deleteUserSuccess(data));
-            console.log('This is Deleted User', data)
+            userDispatch(deleteUserSuccess(response.data));
+            console.log('This is Deleted User', response.data)
             userDispatch(logoutSuccess());
             toast.success('Your logged out successfully.')
             navigate('/');
         } catch (error) {
-            userDispatch(deleteUserFailure(error));
-            toast.error(error.data.error);
+            console.log(error.response.data.error)
+            userDispatch(deleteUserFailure(error.response.data.error));
+            toast.error(error.response.data.error);
         }
 
     };

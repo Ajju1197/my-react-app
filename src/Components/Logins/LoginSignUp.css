@@ -1,13 +1,21 @@
 .signUpFormBlock{
-    display: grid;
+    display: flex;
+    flex-direction: row;
     width: 50%;
     margin: auto;
-    grid-template-columns: 1fr;
     padding: 20px;
+    justify-content: center;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
     background-color: rgba(0,0,0, 0.5);
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.loginRegisterForm{
+    flex: 1 0 300px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }
 .signUpFromMainDiv{
     top: 0;
@@ -42,8 +50,8 @@
     align-items: center;
 } */
 .formImg{
-    height: 400px;
-    width: 100%;
+    height: 300px;
+    flex: 1 0 25vw;
 }
 .formImg img{
     height: 100%;
