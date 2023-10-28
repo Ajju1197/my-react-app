@@ -3,17 +3,13 @@
 .App {
   text-align: center;
   position: relative;
-  height: 100vh;
-  background-color: var(--primary);
-  color: var(--light);
+  /* height: 100vh; */
 }
 
 .withOutSideNavAppClass {
   text-align: center;
   position: relative;
-  height: 100vh;
-  background-color: var(--primary);
-  color: var(--light);
+  /* height: 100vh; */
 }
 
 .SideNavOpenClass{
