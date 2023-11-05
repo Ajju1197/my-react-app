@@ -38,6 +38,7 @@ const About = () => {
                                     <label htmlFor="">Name:</label>
                                     <label htmlFor="">{data.name} 👱‍♂️</label>
                                 </div>
+                                <div>Comming Soon...</div>
                             </div>
                         )) :
                         <p className="text-dark" style={{ textAlign: 'center' }}><b>{isError}</b></p>
