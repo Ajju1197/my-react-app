@@ -422,6 +422,17 @@ a{
   width: 20px !important;
   height:  20px !important;
 }
+.commonButtonStyle{
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: rgba(0,0,0,0.4);
+  color: var(--light);
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 @media (max-width:768px) {
   body{
     font-size: 14px;

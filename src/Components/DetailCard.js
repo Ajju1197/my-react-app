@@ -27,7 +27,7 @@ function DetailCard({signUpUserDetails}) {
                             {selectedImage ? (
                                     <img src={URL.createObjectURL(selectedImage)} alt={formData.name} />
                                 ) : (
-                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || (selectedImage && URL.createObjectURL(selectedImage))} alt={formData.name} />
+                                    <img src={(formData.profileImage && `${process.env.REACT_APP_SERVER_IMAGE_PATH}${formData.profileImage}`) || syedProfile} alt={formData.name} />
                                 )}
                                 <div className='editIcon'>
                                     <input type='file' id="imageUpload" onChange={handleImageChange} disabled={!isAuthorized} ref={inputRef} style={{ display: 'none' }} accept=".png, .jpg, .jpeg" />

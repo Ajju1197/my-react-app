@@ -44,7 +44,7 @@
 /* color: rgb(4,64,71); */
 .homePageTitle {
     color: rgb(247, 220, 79);
-    font-size: 4em;
+    font-size: clamp(2.2rem, 10vw, 5vw);
     font-weight: 200;
     word-spacing: 4px;
     line-height: 56px;
@@ -89,6 +89,36 @@
     transition: all 0.5s ease-in;
 }
 /* AboutPage Styling */
+.aboutPageClass{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.profileSection{
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: space-between;
+    padding: 3em;
+    clip-path: polygon(15% 100%, 100% 60%, 100% 0, 0 0%, 0 80%);
+}
+.printBlock{
+}
+.profileBlock{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+.profileBlock h1{
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.profileSection img{
+    height: 150px;
+    width: 150px;
+    border-radius: 1000px;
+}
 .about_card_block{
     display: flex;
     width: 100%;

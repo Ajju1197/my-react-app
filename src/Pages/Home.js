@@ -12,7 +12,7 @@ const Home = () => {
     const {user} = currUser.user;
     
     const [technologies] = useTypewriter({
-        words: ['MERN','MONGO DB','EXPRESS JS','REACT','Angular', 'NODE JS'],
+        words: ['MERN','MONGO DB','EXPRESS JS','REACT','ANGULAR', 'NODE JS'],
         loop: 0
     })
     const navigate = useNavigate();
