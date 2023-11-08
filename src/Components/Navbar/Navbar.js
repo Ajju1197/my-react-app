@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { useGetUserData } from '../../Hooks/useGetUsersData';
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGetBlogData } from '../../Hooks/useGetBlogData';
 
 const Navbar = ({toggleSideNav, showSideNav}) => {
     // const {user} = useAuthContext();
@@ -19,6 +20,7 @@ const Navbar = ({toggleSideNav, showSideNav}) => {
     const location = useLocation();
     const {logout} = useLogout();
     const { getAllUsersData } = useGetUserData();
+    const {getAllBlogs} = useGetBlogData();
     const [query, setQuery] = useState("");
 
     const currUser = useSelector(state => state.login);
@@ -57,11 +59,21 @@ const Navbar = ({toggleSideNav, showSideNav}) => {
         logout();
     }
 
-    const pathNames = ['/allSignupUsers', '/product']
+    const pathNames = ['/allSignupUsers', '/product', '/blogs']
 
     useEffect(() => {
         setScrollFunction();
-        if(query.length === 0 || query.length >= 2) getAllUsersData(query);
+        if(!query.length === 0 || !query.length >= 2) return;
+        switch (location.pathname) {
+            case '/allSignupUsers':
+                getAllUsersData(query);
+                break;
+            case '/blogs':
+                getAllBlogs(query);
+                break;
+            default:
+                break;
+        }
     },[user, query]);
 
     const handleOnChange = (e) => {

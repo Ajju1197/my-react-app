@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import LoadingSpinner from "../Components/LoadingSpinner";
-import profileIcon from '../images/SyedAjmath.jpg';
+import profileIcon from '../images/syed_ajmathulla.jpg';
 import { useGetUserData } from "../Hooks/useGetUsersData";
 import { useGetUserContext } from "../Hooks/useGetUserContext";
 import { useTypewriter } from 'react-simple-typewriter';
 import { Icon } from '@iconify/react';
 import appLogo from '../images/logo192.png';
+import './PagesStyles.css';
 
 const About = () => {
 
     const { users } = useGetUserContext();
     const { isError, isLoading, getAboutUsersData } = useGetUserData();
+    const sectionToPrint = useRef();
 
     const [technologies] = useTypewriter({
         words: ['MERN','MONGO DB','EXPRESS JS','REACT','ANGULAR', 'NODE JS'],
@@ -21,18 +23,21 @@ const About = () => {
         getAboutUsersData();
     }, []);
 
-    const printAboutPage = () => {
-        const printContent = document.getElementById('printBlock').innerHTML;
-        let originalContents = document.body.innerHTML;
+    const printAboutPage = (printId) => {
+        var originalContents = document.body.innerHTML;
+        var printContent = sectionToPrint.current.innerHTML;
         document.body.innerHTML = printContent;
         window.print();
-        document.body.innerHTML = originalContents;
+
+        setTimeout(() => {
+            document.body.innerHTML = originalContents;
+        }, 100);
     }
 
     return (
         <div className="aboutPageClass">
             <div className="d-flex justify-end">
-                <button className="commonButtonStyle" onClick={printAboutPage}>
+                <button className="commonButtonStyle" onClick={() => printAboutPage('printBlock')}>
                     <Icon icon="flat-color-icons:print" color="white" width="20" />
                     <span>Print</span>
                 </button>
@@ -41,10 +46,12 @@ const About = () => {
                 isLoading ? <LoadingSpinner /> :
                     users.length ?
                         users.map(data => (
-                            <section className="printBlock" id="printBlock">
+                            <section className="printBlock" ref={sectionToPrint} id="printBlock">
                                 <div className="profileSection">
                                     <div className="profileBlock">
-                                        <img src={profileIcon} alt={data.name} />
+                                        <div className="aboutImageClass">
+                                            <img src={profileIcon} alt={data.name} />
+                                        </div>
                                         <div className="text-start">
                                             <h1>{data.name}</h1>
                                             <small><span className="mernClass">{technologies}</span> Developer</small>
@@ -59,10 +66,16 @@ const About = () => {
                                             <Icon icon="iconamoon:email-thin" color="white" width="26" />
                                             <span>Email : {data.email}</span>
                                         </div>
-                                        <div className="d-flex align-items-center gap-2">
-                                            <Icon icon="bxl:linkedin" color="white" width="30" />
-                                            <Icon icon="ant-design:youtube-outlined" color="white" width="30" />
-                                            <Icon icon="iconoir:instagram" color="white" width="30" />
+                                        <div className="d-flex align-items-center gap-2 socialMediaClass">
+                                            <div>
+                                                <Icon icon="bxl:linkedin" color="white" width="30" />
+                                            </div>
+                                            <div>
+                                                <Icon icon="ant-design:youtube-outlined" color="white" width="30" />
+                                            </div>
+                                            <div>
+                                                <Icon icon="iconoir:instagram" color="white" width="30" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

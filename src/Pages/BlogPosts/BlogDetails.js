@@ -28,7 +28,7 @@ function BlogDetails() {
         }
     }
     const handleDisLikeClick = () => {
-        if(singleBlog.likes.includes(user.user._id)){
+        if(!singleBlog.likes.includes(user.user._id)){
             disLikeBlog(params.id);
         }
     }

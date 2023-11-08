@@ -22,10 +22,6 @@ function AllSignUpUsers() {
         if(query.length === 0 || query.length >= 2) getAllUsersData(query);
     },[query]);
 
-    const handleOnChange = (e) => {
-        setQuery(e.target.value);
-    }
-
     return (
         <div className='getAllUserDataClass'>
             {/* <div className='searchClass'>

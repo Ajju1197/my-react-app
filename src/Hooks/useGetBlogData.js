@@ -9,10 +9,10 @@ export const useGetBlogData = () => {
     const newAxiosInstance = useAxios();
     const navigate = useNavigate();
 
-    const getAllBlogs = async () => {
+    const getAllBlogs = async (query) => {
         setLoading(true);
         try {
-            const response = await newAxiosInstance.get('/getAllBlogs');
+            const response = await newAxiosInstance.get(`/getAllBlogs/?blog=${query}`);
             if(response.status !== 200){
                 setLoading(false);
                 toast.error(response.data);

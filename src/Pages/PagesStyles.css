@@ -103,6 +103,18 @@
 }
 .printBlock{
 }
+.aboutImageClass{
+    height: 150px;
+    width: 150px;
+    border: 2px solid aqua;
+    border-radius: 1000px;
+    overflow: hidden;
+}
+.aboutImageClass img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .profileBlock{
     display: flex;
     gap: 10px;
@@ -113,11 +125,6 @@
     font-size: 2rem;
     font-weight: 600;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.profileSection img{
-    height: 150px;
-    width: 150px;
-    border-radius: 1000px;
 }
 .about_card_block{
     display: flex;
@@ -168,6 +175,12 @@
     position: relative;
     z-index: 4;
 }
+.socialMediaClass div{
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 1000px;
+    background-color: rgba(0, 255, 255, 0.423);
+}
 .App-logo{
     margin: auto;
 }
@@ -187,6 +200,11 @@
 }
 .mernClass span:nth-child(4){
     color: #00ED64;
+}
+.address{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
 }
 
 /* Products Styling */
@@ -463,13 +481,15 @@
 }
 .postBlogsClass{
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 400px));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
 }
 .blogCard{
-    background-color: #fff;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    background-color: #00000095;
+    color: #fff;
+    border-radius: 8px;
+    /* border-top-right-radius: 8px;
+    border-top-left-radius: 8px; */
     overflow: hidden;
 }
 .blogImg{
@@ -479,7 +499,7 @@
 .blogImg img{
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    scale: 1.1;
 }
 .blog-likes{
     display: flex;
@@ -494,12 +514,21 @@
 .blog-info{
     color: #000;
     text-align: left;
-    padding: 5px 8px;
+    padding: 15px;
 }
 .blog-info h1{
     font-size: 1.2rem;
     font-weight: bold;
     text-transform: capitalize;
+}
+.createBlogDetails{
+    text-transform: uppercase;
+}
+.createBlogDetails:nth-child(1){
+    color: #10fd3d;
+}
+.createBlogDetails:nth-child(2){
+    color: #e1fc0f;
 }
 /* blogDetailsPageClass */
 .blogDetailsPageClass{
@@ -531,4 +560,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+button:hover{
+    background-color: unset !important;
 }
