@@ -481,7 +481,7 @@
 }
 .postBlogsClass{
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
 }
 .blogCard{
@@ -496,10 +496,13 @@
     height: 300px;
     width: 100%;
 }
+.blogDetailsImg{
+    height: calc(100vh - 350px) !important;
+}
 .blogImg img{
     height: 100%;
     width: 100%;
-    scale: 1.1;
+    /* scale: 1.1; */
 }
 .blog-likes{
     display: flex;
@@ -530,10 +533,22 @@
 .createBlogDetails:nth-child(2){
     color: #e1fc0f;
 }
+.blogsCommentsClass{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+.blogDetailsShowAllBlogsBLock{
+    cursor: pointer;
+}
 /* blogDetailsPageClass */
+.spinningLoad{
+    height: 100%;
+}
 .blogDetailsPageClass{
     display: flex;
-    height: calc(100vh - 109px);
+    height: calc(100vh - 80px);
     overflow-y: auto;
     flex-wrap: wrap;
     gap: 10px;
@@ -553,14 +568,25 @@
     object-fit: cover;
 }
 .blogDetailsShowAllBlogs{
-    flex: 1 0 29%;
-    padding: 10px;
+    flex: 1 0 15%;
+    padding: 0px 10px;
     color: #000;
-    background-color: #000;
+    height: 100%;
+    overflow-y: auto;
+    /* background-color: #000; */
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 button:hover{
     background-color: unset !important;
+}
+.blogDetailsTextareaClass{
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+.blogDetailsDesClass{
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
 }

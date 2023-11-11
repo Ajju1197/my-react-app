@@ -48,7 +48,7 @@ function Login({onLogin}) {
                                 <label>Password</label>
                             </div>
                         </div>
-                        <div className='btnLoginBtn px-3 py-2'>
+                        <button type='submit' disabled={isLoading} className='btnLoginBtn px-3 py-2'>
                             {
                                 isLoading ? 
                                 <div className="spinner-border" role="status">
@@ -56,9 +56,11 @@ function Login({onLogin}) {
                                 </div> : 
                                 <span className="mernArrowIconClass"></span>
                             }
+
+                            Submit
                             
-                            <input type='submit' disabled={isLoading} value='Submit' className='aboutLoginBtn' />
-                        </div>
+                            {/* <input type='submit' disabled={isLoading} value='Submit' className='aboutLoginBtn' /> */}
+                        </button>
                         <div className='alreadyRegisteredUser'>
                             <Link to="/register" className='signUpNavigateClass'>Register</Link>
                         </div>

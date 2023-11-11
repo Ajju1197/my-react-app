@@ -41,7 +41,7 @@ function Blogs() {
                                     {/* <label className='badge'>subscribers : {blog.dislikes.length }</label> */}
                                 </div>
                             </div>
-                            <h3 className='font-normal text-gray-700 dark:text-gray-400'>{blog.comment || 'This is test Description'}</h3>
+                            <h3 className='font-normal text-gray-700 dark:text-gray-400 blogsCommentsClass'>{blog.comment || 'This is test Description'}</h3>
                             <div className='d-flex justify-between'>
                                 <small className='createBlogDetails'>Created at : {formatDate(blog.createdAt)}</small>
                                 <small className='createBlogDetails'>Updated at : {formatDate(blog.updatedAt)}</small>

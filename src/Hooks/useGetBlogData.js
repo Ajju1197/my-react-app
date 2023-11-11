@@ -3,46 +3,65 @@ import { useBlogContext } from "./useBlogContext";
 import { useAxios } from "../Contexts/useAxios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
+import { 
+    getAllBlogsStart, 
+    getAllBlogsSuccess, 
+    getAllBlogsFailure, 
+    getSingleBlogStart, 
+    getSingleBlogSuccess,
+    getSingleBlogFailure,
+    likeBlogSuccess,
+    likeBlogFailure,
+    disLikeBlogSuccess,
+    disLikeBlogFailure,
+} from "../Redux/slices/blogsSlice";
+import { useDispatch } from "react-redux";
+
+
+
 export const useGetBlogData = () => {
     const {blogDispatch} = useBlogContext();
-    const [isLoading, setLoading] = useState(false);
+    const [isBlogLoading, setLoading] = useState(false);
     const newAxiosInstance = useAxios();
     const navigate = useNavigate();
+    const disPatch = useDispatch();
 
     const getAllBlogs = async (query) => {
-        setLoading(true);
+        disPatch(getAllBlogsStart());
         try {
             const response = await newAxiosInstance.get(`/getAllBlogs/?blog=${query}`);
             if(response.status !== 200){
-                setLoading(false);
+                disPatch(getAllBlogsFailure());
                 toast.error(response.data);
                 return; 
             };
             console.log(response)
-            blogDispatch({type:'GET_BLOGS', payload: {blogs: response.data, isLoading: isLoading}});
-            // toast.success('All blogs are fetched successfully.');
-            setLoading(false);
-
+            blogDispatch({type:'GET_BLOGS', payload: {blogs: response.data, isLoading: isBlogLoading}});
+            disPatch(getAllBlogsSuccess(response.data));
+            
         } catch (error) {
             toast.error(error);
+            disPatch(getAllBlogsFailure(error));
         }
     }
 
     const getSingleBlog = async (id) => {
-        setLoading(true);
+        disPatch(getSingleBlogStart());
         try {
             const response = await newAxiosInstance.get(`/getSingleBlog/${id}`);
             if(response.status !== 200){
-                setLoading(false);
+                disPatch(getSingleBlogFailure(response.data));
                 toast.error(response.data);
                 return; 
             };
             setLoading(false);
-            // toast.success('Blog is fetched successfully.');
             
-            blogDispatch({type:'GET_BLOG', payload: {blog: response.data, isLoading: isLoading}});
+            blogDispatch({type:'GET_BLOG', payload: {blog: response.data, isLoading: isBlogLoading}});
+            disPatch(getSingleBlogSuccess(response.data));
         } catch (error) {
             toast.error(error);
+            disPatch(getSingleBlogFailure(error));
         }
     }
 
@@ -57,7 +76,7 @@ export const useGetBlogData = () => {
             };
             setLoading(false);
             toast.success('Blog is Posted successfully.');
-            blogDispatch({type:'ADD_NEW_BLOG', payload: {blog: response.data, isLoading: isLoading}});
+            blogDispatch({type:'ADD_NEW_BLOG', payload: {blog: response.data, isLoading: isBlogLoading}});
             // navigate('/blogs');
         } catch (error) {
             toast.error(error);
@@ -75,7 +94,7 @@ export const useGetBlogData = () => {
             };
             setLoading(false);
             toast.success('Blog is Updated successfully.');
-            blogDispatch({type:'UPDATE_BLOG', payload: {blog: response.data, isLoading: isLoading}});
+            blogDispatch({type:'UPDATE_BLOG', payload: {blog: response.data, isLoading: isBlogLoading}});
             navigate('/blogs');
         } catch (error) {
             toast.error(error);
@@ -83,35 +102,36 @@ export const useGetBlogData = () => {
     }
 
     const likeBlog = async (id) => {
-        setLoading(true);
         try {
             const response = await newAxiosInstance.put(`/likeBlog/${id}`);
             if(response.status !== 200 || response.data.length == 0){
-                setLoading(false);
+                disPatch(likeBlogFailure(response.data));
                 toast.error(response.data);
                 return; 
             };
-            setLoading(false);
-            toast.success('Blog is liked successfully.');
-            blogDispatch({type:'LIKE_BLOG', payload: {blog: response.data.updatedBlog, isLoading: isLoading}});
+            disPatch(likeBlogSuccess(response.data.updatedBlog));
+            blogDispatch({type:'LIKE_BLOG', payload: {blog: response.data.updatedBlog, isLoading: isBlogLoading}});
+            toast.success(response.data.success);
         } catch (error) {
             toast.error(error);
+            disPatch(likeBlogFailure(error));
         }
     }
+
     const disLikeBlog = async (id) => {
-        setLoading(true);
         try {
             const response = await newAxiosInstance.put(`/disLikeBlog/${id}`);
             if(response.status !== 200 || response.data.length == 0){
-                setLoading(false);
+                disPatch(disLikeBlogFailure(response.data));
                 toast.error(response.data);
-                return; 
+                return;
             };
-            setLoading(false);
-            toast.success('Blog is disLiked successfully.');
-            blogDispatch({type:'LIKE_BLOG', payload: {blog: response.data.updatedBlog, isLoading: isLoading}});
+            disPatch(disLikeBlogSuccess(response.data.updatedBlog));
+            toast.success(response.data.success);
+            blogDispatch({type:'LIKE_BLOG', payload: {blog: response.data.updatedBlog, isLoading: isBlogLoading}});
         } catch (error) {
             toast.error(error);
+            disPatch(disLikeBlogFailure(error));
         }
     }
 

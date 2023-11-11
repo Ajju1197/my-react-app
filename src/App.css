@@ -170,11 +170,11 @@
 
 /* Webkit browsers (Safari, Chrome, Edge) */
 ::-webkit-scrollbar {
-  width: 10px; /* Width of the scrollbar track */
+  width: 5px; /* Width of the scrollbar track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary); /* Color of the scrollbar thumb */
+  background-color: var(--aqua); /* Color of the scrollbar thumb */
   border-radius: 5px; /* Rounded corners for the thumb */
 }
 
