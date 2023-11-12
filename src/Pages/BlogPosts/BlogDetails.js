@@ -14,9 +14,11 @@ import { toast } from 'react-toastify';
 function BlogDetails() {
     const params = useParams();
     // const {blogs, singleBlog, isLoading} = useBlogContext();
-    const {getAllBlogs, getSingleBlog, likeBlog, formatDate, disLikeBlog} = useGetBlogData();
+    const [postComment, setComment] = useState('');
+    const {getAllBlogs, getSingleBlog, likeBlog, formatDate, disLikeBlog, commentOnBlog} = useGetBlogData();
     const currUser = useSelector(state => state.login);
     const {blogs, singleBlog, isLoading} = useSelector(state => state.blog);
+    const {comments} = useSelector(state => state.comment);
     const {user} = currUser.user;
     // const {isLoading} = currUser;
     
@@ -46,9 +48,20 @@ function BlogDetails() {
         getSingleBlog(id);
     }
 
-    // if(isLoading){
-    //     return <LoadingSpinner/>
-    // }
+    const handleCommentOnChange = (e) => {
+        setComment(e.target.value);
+    }
+
+    const handleCommentClick = async (e) => {
+        e.preventDefault();
+        if(!postComment) return toast.error('Comment field is must be filled.')
+        let commentData = {
+            blogId: singleBlog._id,
+            comment: postComment,
+        }
+        commentOnBlog(commentData);
+        setComment('');
+    }
 
     return (
         <div className='blogDetailsPageClass'>
@@ -88,12 +101,32 @@ function BlogDetails() {
                             <div className='blogDetailsDesClass'>
                                 <h3 className='font-normal text-gray-700 dark:text-gray-400 blogsCommentsClass'>{singleBlog.comment || 'This is test Description'}</h3>
                             </div>
-                            <div className="commentsBlock">
-                            <form className="d-flex align-items-center" onSubmit={(e) => e.preventDefault()}>
-                                <textarea type="text" className='blogDetailsTextareaClass' placeholder='Add a comment...' name='comment' id='comment' rows="1"></textarea>
-                                <button type="submit" className='buttonClass'>Send</button>
-                            </form>
-                        </div>
+                            <div className="commentsBlock d-flex flex-col gap-4">
+                                <div className='d-flex gap-3'>
+                                    <div className="ProfileUser">
+                                        <img src={process.env.REACT_APP_SERVER_IMAGE_PATH+user.profileImage} alt="" />
+                                    </div>
+                                    <form className="d-flex align-items-center flex-1" onSubmit={handleCommentClick}>
+                                        <textarea type="text" className='blogDetailsTextareaClass' value={postComment} onChange={handleCommentOnChange} placeholder='Add a comment...' name='comment' id='comment' rows="1"></textarea>
+                                        <button type="submit" className='buttonClass'>Send</button>
+                                    </form>
+                                </div>
+                                <div className='commentBlock d-flex flex-col gap-3'>
+                                    {
+                                        comments && comments.map(eachComment => (
+                                            <div key={eachComment._id} className="commentBox d-flex gap-2">
+                                                <div className="ProfileUser">
+                                                    <img src={process.env.REACT_APP_SERVER_IMAGE_PATH+eachComment.user.profileImage} alt="" />
+                                                </div>
+                                                <div className='d-flex flex-col gap-2'>
+                                                    <small className='text-white'><b>{eachComment.user.email}</b></small>
+                                                    <h5 className='text-white'>{eachComment.comment}</h5>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
@@ -101,12 +134,14 @@ function BlogDetails() {
             <div className='blogDetailsShowAllBlogs'>
                 {
                     blogs.map(eachBlog => (
-                        <div className='blogDetailsShowAllBlogsBLock card' key={eachBlog._id} onClick={() => handleEachBlogClick(eachBlog._id)}>
-                            <div className=''>
+                        <div className='blogDetailsShowAllBlogsBLock card' style={{backgroundColor: eachBlog._id === singleBlog._id ? '#000' : '#fff',border: eachBlog._id === singleBlog._id ? '1px solid #fff' : ''}} key={eachBlog._id} onClick={() => handleEachBlogClick(eachBlog._id)}>
+                            <div className='blogDetailsRightBlockCardImageClass'>
                                 <img src={process.env.REACT_APP_SERVER_IMAGE_PATH+eachBlog.image} alt={eachBlog.title} loading='lazy'/>
                             </div>
-                            <div className="text-2xl font-bold tracking-tight text-gray-900 dark:text-dark uppercase">{eachBlog.title}</div>
-                            <div className="title">{eachBlog.comment}</div>
+                            <div className="p-2">
+                                <h4 className='text-2xl font-semibold text-left dark:text-dark uppercase' style={{color: eachBlog._id === singleBlog._id ? '#fff' : '#000'}}>{eachBlog.title}</h4>
+                            </div>
+                            {/* <div className="title">{eachBlog.comment}</div> */}
                         </div>
                     ))
                 }

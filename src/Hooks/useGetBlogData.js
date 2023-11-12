@@ -16,6 +16,8 @@ import {
     disLikeBlogSuccess,
     disLikeBlogFailure,
 } from "../Redux/slices/blogsSlice";
+
+import {getCommentStart, getCommentSuccess, getCommentFail} from '../Redux/slices/commentBlogSlice'
 import { useDispatch } from "react-redux";
 
 
@@ -59,6 +61,7 @@ export const useGetBlogData = () => {
             
             blogDispatch({type:'GET_BLOG', payload: {blog: response.data, isLoading: isBlogLoading}});
             disPatch(getSingleBlogSuccess(response.data));
+            getComments(id);
         } catch (error) {
             toast.error(error);
             disPatch(getSingleBlogFailure(error));
@@ -143,5 +146,26 @@ export const useGetBlogData = () => {
         return `${day}-${month}-${year}`;
     }
 
-    return {getAllBlogs, getSingleBlog, postBlogs, updateBlog, formatDate, likeBlog, disLikeBlog};
+    const commentOnBlog = async (commentData) => {
+        try {
+            const response = await newAxiosInstance.post('/addComment', commentData);
+            console.log(response.data)
+            getComments(response.data.blogId);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getComments = async (blogId) => {
+        try {
+            disPatch(getCommentStart());
+            const response = await newAxiosInstance.get(`/getBlogComment/${blogId}`);
+            disPatch(getCommentSuccess(response.data));
+        } catch (error) {
+            console.log(error)
+            disPatch(getCommentFail(error))
+        }
+    }
+
+    return {getAllBlogs, getSingleBlog, postBlogs, updateBlog, formatDate, likeBlog, disLikeBlog, commentOnBlog};
 }

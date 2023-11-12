@@ -3,6 +3,7 @@ import loginReducer from './slices/authSlice';
 import getAllUsersReducer from './slices/getAllUsersSlice';
 import productCartReducer from './slices/productCartSlice';
 import blogsReducer from './slices/blogsSlice';
+import commentBlogReducer from './slices/commentBlogSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     users: getAllUsersReducer,
     productCart: productCartReducer,
     blog: blogsReducer,
+    comment: commentBlogReducer,
 })
 
 const persistConfig = {
