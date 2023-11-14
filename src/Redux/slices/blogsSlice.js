@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     blogs: [],
     singleBlog:{},
-    isError:false,
-    isLoading:null,
+    isError:null,
+    isLoading:false,
 }
 
 export const blogSlice = createSlice({

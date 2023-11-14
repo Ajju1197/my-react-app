@@ -14,7 +14,7 @@ function AllSignUpUsers() {
     // const {users} = useGetUserContext();
     const [query, setQuery] = useState("");
 
-    const {users, isLoading, IsError} = useSelector(state => state.users);
+    const {users, isLoading, isError} = useSelector(state => state.users);
     const currUser = useSelector(state => state.login);
     const {user} = currUser.user;
 
@@ -31,7 +31,7 @@ function AllSignUpUsers() {
                 {
                     isLoading ? <LoadingSpinner/> :
                     users.map(eachItem => (
-                        <Card userDetails={eachItem} profile={syedProfile} user={user} getAllUsersData={getAllUsersData} userHandleDeleteClick={userHandleDeleteClick}/>
+                        <Card userDetails={eachItem} key={eachItem._id} profile={syedProfile} user={user} getAllUsersData={getAllUsersData} userHandleDeleteClick={userHandleDeleteClick}/>
                     ))
                 }
             </div>

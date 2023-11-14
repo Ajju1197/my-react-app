@@ -13,11 +13,12 @@ import { useSelector } from 'react-redux';
 
 
 function Blogs() {
-    const {getAllBlogs, formatDate, likeBlog, disLikeBlog} = useGetBlogData();
-    const {blogs} = useBlogContext();
+    const {getAllBlogs, formatDate} = useGetBlogData();
+    // const {blogs} = useBlogContext();
     const [query, setQuery] = useState("");
 
     const currUser = useSelector(state => state.login);
+    const {blogs, isLoading} = useSelector(state => state.blog);
     const {user} = currUser.user;
 
     useEffect(() => {
