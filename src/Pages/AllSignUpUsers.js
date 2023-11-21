@@ -30,7 +30,7 @@ function AllSignUpUsers() {
             <div className='signupUserSecondRowBlock'>
                 {
                     isLoading ? <LoadingSpinner/> :
-                    users.map(eachItem => (
+                    users && users.map(eachItem => (
                         <Card userDetails={eachItem} key={eachItem._id} profile={syedProfile} user={user} getAllUsersData={getAllUsersData} userHandleDeleteClick={userHandleDeleteClick}/>
                     ))
                 }
