@@ -316,7 +316,7 @@ a{
 .btnLoginBtn {
   color: aqua !important;
   letter-spacing: 6px;
-  padding: 1rem;
+  padding: 10px !important;
   font-size: 80% !important;
   display: flex;
   position: relative;

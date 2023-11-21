@@ -109,20 +109,22 @@ const Navbar = ({toggleSideNav, showSideNav}) => {
                     <div>
                         {user ? 
                             <div className='dropdownClass'>
-                                {!user ? 
-                                <LoadingSpinner/> : 
-                                <div className='profileIconWithEmail'>
-                                    <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>{user.email}</label>
-                                    <div className='ProfileUser'>
-                                        <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + user.profileImage} alt={user.name} loading='lazy'/>
+                                {
+                                    !user ? 
+                                    <LoadingSpinner/> : 
+                                    <div className='profileIconWithEmail'>
+                                        <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>{user.email}</label>
+                                        <div className='ProfileUser'>
+                                            <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + user.profileImage} alt={user.name} loading='lazy'/>
+                                        </div>
+                                        <div className='dropDown'>
+                                            <ul className='dropDownList'>
+                                                <li><NavLink to={`userDetails/${user._id}`}><FaUserTie/>User Profile</NavLink></li>
+                                                <li onClick={handleLogoutClick}><img alt="Logout" src={Logout}/> Signout</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>}
-                                <div className='dropDown'>
-                                    <ul className='dropDownList'>
-                                        <li><NavLink to={`userDetails/${user._id}`}><FaUserTie/>User Profile</NavLink></li>
-                                        <li onClick={handleLogoutClick}><img alt="Logout" src={Logout}/> Signout</li>
-                                    </ul>
-                                </div>
+                                }
                             </div> :
                             <NavLink to="/">Signin</NavLink>
                         }

@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import { useGetUserContext } from '../Hooks/useGetUserContext';
 import { useGetUserData } from '../Hooks/useGetUsersData';
 import '../Components/Logins/LoginSignUp.css';
-import DetailCard from '../Components/DetailCard';
+// import DetailCard from '../Components/DetailCard';
 import LoadingSpinner from '../Components/LoadingSpinner';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { useSelector } from 'react-redux';
+
+const DetailCard = React.lazy(() => import('../Components/DetailCard'))
 
 function SignUpUserDetail() {
     const params = useParams();

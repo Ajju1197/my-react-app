@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useGetBlogData } from '../../Hooks/useGetBlogData';
 import { useBlogContext } from '../../Hooks/useBlogContext';
 import like from '../../images/like.svg';
@@ -16,6 +16,7 @@ function Blogs() {
     const {getAllBlogs, formatDate} = useGetBlogData();
     // const {blogs} = useBlogContext();
     const [query, setQuery] = useState("");
+    const navigate = useNavigate();
 
     const currUser = useSelector(state => state.login);
     const {blogs, isLoading} = useSelector(state => state.blog);
@@ -27,6 +28,15 @@ function Blogs() {
 
     return (
         <div className='allBlogsPageClass'>
+            <div className="blogsActionButtons">
+                <button type='button' className='btnLoginBtn' onClick={() => navigate(-1)}>Go back</button>
+                <button type='button' className="btnLoginBtn">
+                    <span className='d-flex align-items-center gap-x-3'>
+                        <img src={plus} alt="plus"/>
+                        <NavLink to='/postBlog' className='text-white'>Add</NavLink>
+                    </span>
+                </button>
+            </div>
             <div className='postBlogsClass'>
                 {blogs.map(blog => (
                     <div key={blog._id} className='blogCard'>
@@ -48,18 +58,12 @@ function Blogs() {
                                 <small className='createBlogDetails'>Updated at : {formatDate(blog.updatedAt)}</small>
                             </div>
                             <div className="d-flex align-items-center gap-2">
-                                <button type='button' className="btn btn-primary">
-                                    <span className='d-flex align-items-center gap-x-1'>
-                                        <img src={plus} alt="plus"/>
-                                        <NavLink to='/postBlog' className='text-white'>Add</NavLink>
-                                    </span>
-                                </button>
-                                <button type='button' className="btn btn-primary">
+                                {/* <button type='button' className="btn btn-primary">
                                     <span className='d-flex align-items-center gap-x-1'>
                                         <img src={edit} alt="edit"/>
                                         <NavLink to='/postBlog' className='text-white'>Edit</NavLink>
                                     </span>
-                                </button>
+                                </button> */}
                                 <button type='button' className="btn btn-primary">
                                     <span className='d-flex align-items-center gap-x-1'>
                                         <img src={view} alt="view"/>

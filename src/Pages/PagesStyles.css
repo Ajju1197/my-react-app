@@ -605,3 +605,12 @@ button:hover{
     height: 100%;
     width: 100%;
 }
+.allBlogsPageClass{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.blogsActionButtons{
+    display: flex;
+    gap: 10px;
+}

@@ -117,10 +117,9 @@
     transition: all 0.5s ease-in;
     /* overflow: hidden; */
 }
-.dropdownClass:hover > .dropDown{
+.dropdownClass:hover .dropDown{
     transition: all 0.5s ease-in;
-    opacity: 1;
-    top:50px
+    display: block;
 }
 /* .dropdownClass:hover{
     transition: all 0.5s ease-in;
@@ -128,16 +127,15 @@
 } */
 
 .dropDown{
-    width: 100%;
-    right: 0px;
     position: absolute;
-    top: -50px;
     transition: all 0.5s ease-in-out;
     background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    /* padding: 5px; */
-    opacity: 0;
     border-radius: 5px;
+    top: 50px;
+    width: 100%;
+    display: none;
+    left: 0;
 }
 
 .dropDownList{
@@ -147,6 +145,7 @@
     margin: 0px;
     flex-direction: column;
     color: #000;
+    position: relative;
 }
 .dropDownList li{
     list-style: none;
@@ -157,6 +156,12 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    position: relative;
+    transition: 0.4s all ease;
+}
+.dropDownList li:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.4s all ease;
 }
 .dropDownList li > a{
     width: 100%;

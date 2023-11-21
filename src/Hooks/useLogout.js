@@ -21,7 +21,7 @@ export const useLogout = () => {
         
         await axios.put('/logout', {
             isActive: false,
-            userId: user._id,
+            userId: user ? user._id : '',
         });
         // remove user from storage.
         localStorage.removeItem('user');
