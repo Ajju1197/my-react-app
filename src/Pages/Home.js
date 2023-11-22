@@ -19,6 +19,11 @@ const Home = () => {
     return (
         <div className="homePageClass">
             <div className="main-block">
+                <div className="overlay-aqua"></div>
+                <div className="overlay-aqua"></div>
+                <div className="overlay-aqua"></div>
+                <div className="overlay-aqua"></div>
+                <div className="overlay-aqua"></div>
                 <div className="headingBlock">
                     <h1 className="homePageTitle">SYED AJMATHULLA</h1>
                     <p className="subHeading">I am a <span className="mernClass">{technologies}</span> Developer</p>

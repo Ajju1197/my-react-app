@@ -119,7 +119,7 @@ function BlogDetails() {
                                                     <img src={process.env.REACT_APP_SERVER_IMAGE_PATH+eachComment.user.profileImage} alt="" />
                                                 </div>
                                                 <div className='d-flex flex-col gap-2'>
-                                                    <small className='text-white'><b>{eachComment.user.email}</b></small>
+                                                    <small className='text-white'><b>{eachComment.user.name}</b></small>
                                                     <h5 className='text-white'>{eachComment.comment}</h5>
                                                 </div>
                                             </div>
@@ -139,7 +139,7 @@ function BlogDetails() {
                                 <img src={process.env.REACT_APP_SERVER_IMAGE_PATH+eachBlog.image} alt={eachBlog.title} loading='lazy'/>
                             </div>
                             <div className="p-2">
-                                <h4 className='text-2xl font-semibold text-left dark:text-dark uppercase' style={{color: eachBlog._id === singleBlog._id ? '#fff' : '#000'}}>{eachBlog.title}</h4>
+                                <h4 className='font-semibold text-left dark:text-dark uppercase' style={{color: eachBlog._id === singleBlog._id ? '#fff' : '#000'}}>{eachBlog.title}</h4>
                             </div>
                             {/* <div className="title">{eachBlog.comment}</div> */}
                         </div>

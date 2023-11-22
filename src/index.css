@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  /* for bg */
+  --primary: #01011d;
+  --light:#ffffff;
+  --dark:#000000;
+  --lime:rgb(61, 245, 61);
+  --red: rgba(248, 12, 12, 0.949);
+  --aqua:aqua;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -16,16 +26,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--primary);
   color: var(--light);
-}
-
-:root{
-  /* for bg */
-  --primary: #010141;
-  --light:#ffffff;
-  --dark:#000000;
-  --lime:rgb(61, 245, 61);
-  --red: rgba(248, 12, 12, 0.949);
-  --aqua:aqua;
 }
 
 code {

@@ -7,11 +7,11 @@
 }
 .homePageClass {
     position: relative;
-    background-size: contain;
+    /* background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: right center;
-    background-image: url(../images/ajju_goa-removebg-preview.png);
+    background-image: url(../images/ajju_goa-removebg-preview.png); */
 }
 
 /* .homePageClass::before {
@@ -35,10 +35,44 @@
     /* width: 62%; */
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
     z-index: 1;
     gap: 2em;
+}
+.overlay-aqua{
+    position: absolute;
+    clip-path: circle(50% at 50% 50%);
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+}
+.overlay-aqua:nth-child(1){
+    top: 0;
+    right: 10px;
+    width: 80px;
+    height: 80px;
+}
+.overlay-aqua:nth-child(2){
+    top: 100px;
+    left: 400px;
+    width: 150px;
+    height: 150px;
+}
+.overlay-aqua:nth-child(3){
+    bottom: 150px;
+    right: 200px;
+    width: 50px;
+    height: 50px;
+}
+.overlay-aqua:nth-child(4){
+    bottom: 100px;
+    right: 50%;
+}
+.overlay-aqua:nth-child(5){
+    bottom: 400px;
+    left: 100px;
 }
 
 /* color: rgb(4,64,71); */
