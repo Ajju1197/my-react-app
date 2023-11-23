@@ -25,6 +25,8 @@ export const useLogout = () => {
         });
         // remove user from storage.
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenExpiresAt');
         // dispatchFromAuth({type: 'LOGOUT'});
         dispatch(logoutSuccess());
         getAllUsersData();

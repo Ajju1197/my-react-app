@@ -11,6 +11,8 @@ import { Routes, Route, Navigate, useNavigate, Outlet } from 'react-router-dom';
 import logo from './logo.svg';
 import LoadingSpinner from './Components/LoadingSpinner';
 import { useSelector } from 'react-redux';
+import { useLogout } from './Hooks/useLogout';
+
 
 const Home =  React.lazy(() => import('./Pages/Home'));
 const About =  React.lazy(() => import('./Pages/About'));
@@ -38,17 +40,48 @@ const App = () => {
   const [showSideNav, setShowSideNav] = useState(false);
   // const {user} = useAuthContext();
   const currUser = useSelector(state => state.login);
+  const {logout} = useLogout();
+
   const { user } = currUser.user;
   
   // this Code is to Show Hide the sideNavBar.
   const toggleSideNav = () => {
     setShowSideNav(!showSideNav)
   }
+
+   // Function to check token expiration
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem('token');
+    const tokenExpiresAt = localStorage.getItem('tokenExpiresAt');
+
+    if (token && tokenExpiresAt) {
+      const currentTime = Date.now() / 1000; // Current time in seconds
+      const expirationTime = new Date(tokenExpiresAt).getTime() / 1000; // Expiration time in seconds
+
+      if (expirationTime < currentTime) {
+        // Token expired, perform logout
+        logout();
+      }
+    }
+  };
   
   useEffect(() => {
     // const LoginUser = JSON.parse(localStorage.getItem('user'));
-    if(user) window.document.title = `MERN | ${user.name}`;
-    else setShowSideNav(false);
+    if(!user) return setShowSideNav(false); 
+
+    window.document.title = `MERN | ${user.name}`;
+
+    checkTokenExpiration();
+    // You can set up a timer or use other methods to periodically check token expiration
+    // For instance, setInterval
+    const tokenCheckInterval = setInterval(() => {
+      checkTokenExpiration();
+      console.log('Token is Expired..');
+    }, 60000); // Check every minute, adjust as needed
+
+    return () => {
+      clearInterval(tokenCheckInterval); // Clean up interval on component unmount
+    };
     
   },[user])
 

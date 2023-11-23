@@ -35,6 +35,8 @@ export const useLogin = () => {
 
             // save the user to local storage.
             localStorage.setItem('user', JSON.stringify(json));
+            localStorage.setItem('token', json.token);
+            localStorage.setItem('tokenExpiresAt', json.expiresAt);
 
             dispatch(loginSuccess({data: json}));
     

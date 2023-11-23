@@ -113,7 +113,7 @@ const Navbar = ({toggleSideNav, showSideNav}) => {
                                     !user ? 
                                     <LoadingSpinner/> : 
                                     <div className='profileIconWithEmail'>
-                                        <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>{user.email}</label>
+                                        <label className={location.pathname === '/home' ? 'emailColorWhiteClass' : 'emailColorDarkClass'}>Welcome, {user.email}</label>
                                         <div className='ProfileUser'>
                                             <img src={process.env.REACT_APP_SERVER_IMAGE_PATH + user.profileImage} alt={user.name} loading='lazy'/>
                                         </div>
