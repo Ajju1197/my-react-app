@@ -10,3 +10,43 @@
     right: 0;
     background-color: red;
 }
+.mernCartMainClass{
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding: 15px;
+    width: 95%;
+    margin: auto;
+    padding: 1em;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+    /* grid-template-rows:minmax(300px, 300px); */
+}
+.cartProductImage{
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.cartProductImage img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.cartCardBorderClass{
+    border: 1px solid var(--aqua);
+}
+.cartCardBorderClass small{
+    color: var(--aqua);
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.productDetailsClass{
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    flex-direction: column;
+    margin: auto;
+}

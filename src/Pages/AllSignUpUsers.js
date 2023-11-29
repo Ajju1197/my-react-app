@@ -27,7 +27,7 @@ function AllSignUpUsers() {
             {/* <div className='searchClass'>
                 <Form data={users} handleOnChange={handleOnChange}/>
             </div> */}
-            <div className='signupUserSecondRowBlock'>
+            <div className='mernCardMainBlockClass'>
                 {
                     isLoading ? <LoadingSpinner/> :
                     users && users.map(eachItem => (

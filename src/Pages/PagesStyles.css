@@ -253,10 +253,12 @@
 }
 
 .searchClass {
-    width: 30%;
     display: flex;
     gap: 10px;
     align-items: center;
+}
+.searchClass input{
+    flex: 1;
 }
 
 .productTabsClass {
@@ -266,8 +268,21 @@
 }
 
 .product .active {
-    background-color: aqua !important;
+    background-color: var(--primary) !important;
     color: #fff !important;
+}
+.product .nav-item .nav-link:hover{
+    border: none !important;
+    outline: none !important;
+}
+.product .nav-item .nav-link{
+    border: none !important;
+    outline: none !important;
+}
+.product .nav-item .nav-link.active{
+    border: 1px solid #fff !important;
+    outline: none !important;
+    color: var(--aqua) !important;
 }
 
 .productsClass {
@@ -368,7 +383,7 @@
 .noSuccessClass{
     background-color: rgba(0, 0, 0, 0.5);
 }
-.signupUserSecondRowBlock{
+.mernCardMainBlockClass{
     width: 100%;
     display: grid;
     gap: 10px;

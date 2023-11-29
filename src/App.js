@@ -34,6 +34,7 @@ const Settings =  React.lazy(() => import('./Pages/Settings'));
 const Blogs =  React.lazy(() => import('./Pages/BlogPosts/Blogs'));
 const BlogDetails =  React.lazy(() => import('./Pages/BlogPosts/BlogDetails'));
 const PostBlogs =  React.lazy(() => import('./Pages/BlogPosts/PostBlogs'));
+const CartProducts =  React.lazy(() => import('./Pages/Products/CartProducts'));
 
 const App = () => {
 
@@ -126,7 +127,8 @@ const App = () => {
                             <Route path="featuredProducts" element={<FeaturedProducts />} />
                             <Route path="newProducts" element={<NewProducts />} />
                           </Route>
-                          <Route path="product/productDetails/:id" element={<ProductDetails />} />
+                          <Route path="product/productDetails/:id" element={user ? <ProductDetails /> : < Navigate to="/" />} />
+                          <Route path="product/cartProducts" element={user ? <CartProducts/> : <Navigate to="/"/>}/>
                           <Route path="*" element={<PageNotFound/>}/>
                     </Routes>
                 </div>

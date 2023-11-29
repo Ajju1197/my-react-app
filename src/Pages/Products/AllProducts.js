@@ -29,7 +29,7 @@ function AllProducts() {
         dispatch(addToCart(eachItem));
     }
     return (
-        <div className='productList'>
+        <div className='productList mernCardMainBlockClass'>
             {
                 products && products.length > 0 ? (
                     products.map((eachItem) => (
@@ -43,8 +43,8 @@ function AllProducts() {
                                     <p>{eachItem.description}</p>
                                 </div>
                                 <div className='d-flex gap-2 align-items-center p-3 justify-center'>
-                                    <button type='button' className='btn btn-primary bg-dark' onClick={() => handleAddToCart(eachItem)}>Add To Cart</button>
-                                    <Link type='button' className='btn btn-primary bg-dark text-white' to={`productDetails/${eachItem.id}`}>View Product Details</Link>
+                                    <Link type='button' className='btn btn-primary bg-dark text-white' onClick={() => handleAddToCart(eachItem)}>Add To Cart</Link>
+                                    <Link type='button' className='btn btn-primary bg-dark text-white' to={`productDetails/${eachItem.id}`}>View Details</Link>
                                 </div>
                             </div>
                             <div className='social-icons'>

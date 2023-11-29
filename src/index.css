@@ -455,3 +455,13 @@ a{
   color: #000 !important;
   transition: all 0.4s ease-in;
 }
+.commingSoonClass{
+  height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.commingSoonClass h2{
+  font-size: 3em;
+  color: var(--aqua);
+}

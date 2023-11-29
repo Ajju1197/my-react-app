@@ -2,8 +2,8 @@ import React from 'react'
 
 function NewProducts() {
     return (
-        <div className='productList'>
-            <label>New Products</label>
+        <div className='commingSoonClass'>
+            <label>Comming Soon...</label>
         </div>
     )
 }
