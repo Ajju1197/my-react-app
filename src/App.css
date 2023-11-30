@@ -240,4 +240,7 @@
   .searchInputClass{
     display: none;
   }
+  .postBlogCardClass{
+    grid-template-columns: 1fr !important;
+  }
 }

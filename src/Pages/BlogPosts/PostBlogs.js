@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useGetBlogData } from '../../Hooks/useGetBlogData';
 import { useAuthContext } from '../../Hooks/useAuthContext';
+import './blog.css';
+import blogProfile from '../../images/user_blog.jpg'
 
 function PostBlogs() {
     const {postBlogs, percentage} = useGetBlogData();
@@ -11,6 +13,7 @@ function PostBlogs() {
         comment:'',
         image:'',
     })
+    const fileRef = useRef();
 
 
     const handleInputChange = (e) => {
@@ -23,6 +26,10 @@ function PostBlogs() {
         const file =  e.target.files[0];
         setBlogImage(file);
         setFormData({...formData, image: file});
+    }
+
+    const handleImagePostClick = () => {
+        fileRef.current.click();
     }
 
     const handlePostSubmit = async (e) => {
@@ -41,19 +48,27 @@ function PostBlogs() {
         <div>
             <form onSubmit={handlePostSubmit}>
                 {percentage > 0 && <progress max='100' value={percentage} className='bg-white'></progress>}
-                
-                <div>
-                    <img src={blogImage && URL.createObjectURL(blogImage)} style={{width:'200px',height:'200px'}} alt="" />
-                    <input type="file" name='file' onChange={handleImageUploadChange}/>
-                </div>
-                <div>
-                    <input type="text" className='form-control' name='title' value={formData.title} onChange={handleInputChange} />
-                </div>
-                <div>
-                    <input type="text" className='form-control' name='title' value={formData.title} onChange={handleInputChange} />
-                </div>
-                <div>
-                    <input type="submit" className='bg-white text-black px-5 py-2' value='Post' />
+                <div className="postBlogCardClass">
+                    <div className='postBlogImageClass'>
+                        <img src={blogImage && URL.createObjectURL(blogImage) || blogProfile} alt="" />
+                    </div>
+                    <div className='postBlogInputFields'>
+                        <div>
+                            <button type='button' className='btnLoginBtn' onClick={handleImagePostClick}>UPLOAD IMAGE</button>
+                            <input type="file" ref={fileRef} name='file' onChange={handleImageUploadChange} hidden accept=".png, .jpg, .jpeg"/>
+                        </div>
+                        <div className='mernInputStyleClass'>
+                            <input type="text" className='form-control' name='title' placeholder=' ' id="title" value={formData.title} onChange={handleInputChange} />
+                            <label>Title</label>
+                        </div>
+                        <div className='mernInputStyleClass'>
+                            <input type="text" className='form-control' name='comment' placeholder=' ' id="comment" value={formData.comment} onChange={handleInputChange} />
+                            <label>Comment</label>
+                        </div>
+                        <div className='d-flex justify-center'>
+                            <input type="submit" className='btnLoginBtn' value='Post' />
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
