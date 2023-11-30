@@ -3,6 +3,7 @@ import { useGetBlogData } from '../../Hooks/useGetBlogData';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 import './blog.css';
 import blogProfile from '../../images/user_blog.jpg'
+import { useNavigate } from 'react-router-dom';
 
 function PostBlogs() {
     const {postBlogs, percentage} = useGetBlogData();
@@ -14,6 +15,7 @@ function PostBlogs() {
         image:'',
     })
     const fileRef = useRef();
+    const navigate = useNavigate();
 
 
     const handleInputChange = (e) => {
@@ -65,8 +67,9 @@ function PostBlogs() {
                             <input type="text" className='form-control' name='comment' placeholder=' ' id="comment" value={formData.comment} onChange={handleInputChange} />
                             <label>Comment</label>
                         </div>
-                        <div className='d-flex justify-center'>
+                        <div className='d-flex justify-center gap-2'>
                             <input type="submit" className='btnLoginBtn' value='Post' />
+                            <input type="button" className='btnLoginBtn' value='Go back' onClick={() => navigate(-1)} />
                         </div>
                     </div>
                 </div>

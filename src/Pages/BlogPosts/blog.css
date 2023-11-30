@@ -17,7 +17,7 @@
     gap: 10px;
 }
 .postBlogImageClass{
-    height: 60vh;
+    aspect-ratio: 16 / 9;
     width: 100%;
     overflow: hidden;
     min-height: 300px;
